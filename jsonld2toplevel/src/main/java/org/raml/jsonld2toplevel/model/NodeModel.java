@@ -60,19 +60,19 @@ public final class NodeModel {
 		return dialectPropertyMappings;
 	}
 
-	public Object fill(JSONObject object, Object newInstance, LinkedHashMap<String, Object> idMap) {
+	public Object fill(JSONObject object, Object newInstance, LinkedHashMap<String, Object> idMap,Context ct) {
 		Map<String, PropertyModel> dialectPropertyMappings = getDialectPropertyMappings();
 		for (String s : dialectPropertyMappings.keySet()) {
 			if (object.has(s)) {
 				Object value = object.get(s);
 				PropertyModel propertyModel = dialectPropertyMappings.get(s);
-				propertyModel.readFromJSON(newInstance, value, object);
+				propertyModel.readFromJSON(newInstance, value, object, idMap,ct);
 			}
 		}
 		return newInstance;
 	}
 
-	public Object readFromJSON(JSONObject object) {
+	public Object readFromJSON(JSONObject object, LinkedHashMap<String, Object> idMap,Context ct) {
 		try {
 			if (!this.alternatives.isEmpty()) {
 				NodeModel alrernative = null;
@@ -83,11 +83,11 @@ public final class NodeModel {
 					}
 				}
 				if (alrernative != null) {
-					return alrernative.readFromJSON(object);
+					return alrernative.readFromJSON(object, idMap,ct);
 				}
 			}
 			Object newInstance = targetClass.newInstance();
-			fill(object, newInstance, new LinkedHashMap<String, Object>());
+			fill(object, newInstance, new LinkedHashMap<String, Object>(),ct);
 			return newInstance;
 		} catch (Exception e) {
 			throw new IllegalStateException(e);

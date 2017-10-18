@@ -43,7 +43,9 @@ public class PropertyModel {
 
 	protected boolean required;
 
-	public boolean reference;
+	protected boolean reference;
+
+	protected boolean resolve;
 
 	public PropertyModel(String propertyTerm, String dialectName, NodeRegistry reg) {
 		super();
@@ -56,6 +58,11 @@ public class PropertyModel {
 	public void append(Object target, Object newValue, JSONObject oo, String key) {
 
 		try {
+			if (!nodeType.isInstance(newValue)) {
+				if (nodeType == String.class) {
+					newValue = newValue.toString();
+				}
+			}
 			if (!allowMultiple && !asMap) {
 				setValue(target, newValue);
 			} else if (allowMultiple) {
@@ -115,6 +122,7 @@ public class PropertyModel {
 	void setValue(Object target, Object value) {
 		try {
 			if (this.field != null) {
+
 				this.field.set(target, value);
 			} else
 				this.setMethod.invoke(target, value);
@@ -124,7 +132,7 @@ public class PropertyModel {
 	}
 
 	public void writeToJSONLD(JSONObject obj, Object source, String id) {
-		
+
 		JSONArray produce = produce(source, id);
 		if (produce != null) {
 			obj.put(this.propertyTerm, produce);
@@ -133,9 +141,9 @@ public class PropertyModel {
 
 	private JSONArray produce(Object source, String id) {
 		Object value = getValue(source);
-		
+
 		if (value != null) {
-			if (value.equals(Boolean.FALSE)){
+			if (value.equals(Boolean.FALSE)) {
 				return null;
 			}
 			JSONArray res = new JSONArray();
@@ -170,10 +178,9 @@ public class PropertyModel {
 	private JSONObject proceed(Object value, String id) {
 		if (isBuiltin(value)) {
 			JSONObject object = new JSONObject();
-			if (this.reference){
+			if (this.reference) {
 				object.put(ID, value);
-			}
-			else{
+			} else {
 				object.put(VALUE, value);
 			}
 			return object;
@@ -259,14 +266,19 @@ public class PropertyModel {
 				|| value instanceof Boolean;
 	}
 
-	public void readFromJSON(Object newInstance, Object value, JSONObject original) {
+	public void readFromJSON(Object newInstance, Object value, JSONObject original, LinkedHashMap<String, Object> idMap,
+			Context ct) {
+		if (this.resolve) {
+			value = ct.revolve(value.toString());
+		}
 		if (isBuiltin(value)) {
+
 			append(newInstance, value, original, null);
 		} else if (value instanceof JSONArray) {
 			JSONArray arr = (JSONArray) value;
 			for (Object v : arr) {
 				if (v instanceof JSONObject) {
-					append(newInstance, parseJSONObject(v), original, null);
+					append(newInstance, parseJSONObject(v, ct), original, null);
 				} else {
 					append(newInstance, v, original, null);
 				}
@@ -277,18 +289,22 @@ public class PropertyModel {
 				for (String key : vObject.keySet()) {
 					Object object = vObject.get(key);
 					if (object instanceof JSONObject) {
-						append(newInstance, parseJSONObject(object), (JSONObject) object, key);
+						Object parseJSONObject = parseJSONObject(object, ct);
+						NodeModel register = registry.register(parseJSONObject.getClass());
+						PropertyModel propertyModel = register.getMappings().get(hash);
+						propertyModel.setValue(parseJSONObject, key);
+						append(newInstance, parseJSONObject, (JSONObject) object, key);
 					} else {
-						append(newInstance, object, (JSONObject) object, key);
+						append(newInstance, object, null, key);
 					}
 				}
 			} else {
-				append(newInstance, registry.register(nodeType).readFromJSON(vObject), original, null);
+				append(newInstance, parseJSONObject(vObject, ct), original, null);
 			}
 		}
 	}
 
-	private Object parseJSONObject(Object v) {
-		return registry.register(nodeType).readFromJSON((JSONObject) v);
+	private Object parseJSONObject(Object v, Context ct) {
+		return registry.register(nodeType).readFromJSON((JSONObject) v, null, ct);
 	}
 }

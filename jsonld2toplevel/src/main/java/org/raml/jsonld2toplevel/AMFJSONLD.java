@@ -9,6 +9,7 @@ import java.util.LinkedHashMap;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.json.JSONTokener;
+import org.raml.jsonld2toplevel.model.Context;
 import org.raml.jsonld2toplevel.model.NodeModel;
 import org.raml.jsonld2toplevel.model.NodeRegistry;
 import org.raml.jsonld2toplevel.model.PropertyModel;
@@ -86,7 +87,9 @@ public final class AMFJSONLD {
 	}
 
 	public <T> T readFromJSON(JSONObject object, Class<T> t) {
-		return t.cast(nodeRegistry.register(t).readFromJSON(object));
+		LinkedHashMap<String, Object> idMap = new LinkedHashMap<String, Object>();
+		Context ct = new Context(object, nodeRegistry);
+		return t.cast(nodeRegistry.register(t).readFromJSON(object, idMap, ct));
 	}
 
 	public String writeToJSONLDString(Object object, String id) {
@@ -109,7 +112,7 @@ public final class AMFJSONLD {
 			for (Object o : jsonArray) {
 				JSONObject obj = (JSONObject) o;
 				if (obj.has(VALUE)) {
-					propertyModel.append(newInstance, obj.get(VALUE), obj,null);
+					propertyModel.append(newInstance, obj.get(VALUE), obj, null);
 				} else if (obj.has(TYPE)) {
 					String tp = obj.getJSONArray(TYPE).getString(0);
 					String id = obj.getString(ID);
@@ -120,15 +123,15 @@ public final class AMFJSONLD {
 						knownObjects.put(id, propObject);
 					}
 					fill(obj, propObject, knownObjects);
-					propertyModel.append(newInstance, propObject, obj,null);
+					propertyModel.append(newInstance, propObject, obj, null);
 					if (model == null) {
 						throw new IllegalStateException("Type " + tp + " is not known to the system");
 					}
 				} else {
-					 if (obj.has(ID)){
-						 propertyModel.append(newInstance, obj.get(ID), obj,null);
-					 }
-					 else throw new IllegalStateException("It is expected that values here should have @value  or @type");
+					if (obj.has(ID)) {
+						propertyModel.append(newInstance, obj.get(ID), obj, null);
+					} else
+						throw new IllegalStateException("It is expected that values here should have @value  or @type");
 				}
 			}
 		}
