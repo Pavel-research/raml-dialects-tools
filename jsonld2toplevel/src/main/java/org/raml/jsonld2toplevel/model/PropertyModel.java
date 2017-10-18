@@ -19,6 +19,8 @@ public class PropertyModel {
 
 	private static final String VALUE = "@value";
 
+	private static final String ID = "@id";
+
 	protected final String propertyTerm;
 
 	private NodeRegistry registry;
@@ -40,6 +42,8 @@ public class PropertyModel {
 	protected Class<?> nodeType;
 
 	protected boolean required;
+
+	public boolean reference;
 
 	public PropertyModel(String propertyTerm, String dialectName, NodeRegistry reg) {
 		super();
@@ -120,6 +124,7 @@ public class PropertyModel {
 	}
 
 	public void writeToJSONLD(JSONObject obj, Object source, String id) {
+		
 		JSONArray produce = produce(source, id);
 		if (produce != null) {
 			obj.put(this.propertyTerm, produce);
@@ -128,7 +133,11 @@ public class PropertyModel {
 
 	private JSONArray produce(Object source, String id) {
 		Object value = getValue(source);
+		
 		if (value != null) {
+			if (value.equals(Boolean.FALSE)){
+				return null;
+			}
 			JSONArray res = new JSONArray();
 			if (asMap && value instanceof Map<?, ?>) {
 				Map<?, ?> map = (Map<?, ?>) value;
@@ -161,7 +170,12 @@ public class PropertyModel {
 	private JSONObject proceed(Object value, String id) {
 		if (isBuiltin(value)) {
 			JSONObject object = new JSONObject();
-			object.put(VALUE, value);
+			if (this.reference){
+				object.put(ID, value);
+			}
+			else{
+				object.put(VALUE, value);
+			}
 			return object;
 		} else {
 			NodeModel register = registry.register(value.getClass());

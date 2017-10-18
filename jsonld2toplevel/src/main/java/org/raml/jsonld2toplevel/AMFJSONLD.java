@@ -125,7 +125,10 @@ public final class AMFJSONLD {
 						throw new IllegalStateException("Type " + tp + " is not known to the system");
 					}
 				} else {
-					throw new IllegalStateException("It is expected that values here should have @value  or @type");
+					 if (obj.has(ID)){
+						 propertyModel.append(newInstance, obj.get(ID), obj,null);
+					 }
+					 else throw new IllegalStateException("It is expected that values here should have @value  or @type");
 				}
 			}
 		}

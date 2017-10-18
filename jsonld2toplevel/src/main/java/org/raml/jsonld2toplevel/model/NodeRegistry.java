@@ -17,6 +17,7 @@ import org.raml.jsonld2toplevel.annotations.Hash;
 import org.raml.jsonld2toplevel.annotations.Mandatory;
 import org.raml.jsonld2toplevel.annotations.DialectPropertyName;
 import org.raml.jsonld2toplevel.annotations.PropertyTerm;
+import org.raml.jsonld2toplevel.annotations.Reference;
 
 public final class NodeRegistry {
 
@@ -109,6 +110,7 @@ public final class NodeRegistry {
 		handleFieldBindings(mdl, clazz);
 		for (PropertyModel m : mdl.mappings.values()) {
 			mdl.dialectPropertyMappings.put(m.dialectName, m);
+			register(m.nodeType);
 		}
 	}
 
@@ -172,6 +174,9 @@ public final class NodeRegistry {
 		}
 		if (memb.getAnnotation(Mandatory.class) != null) {
 			ts.required = true;
+		}
+		if (memb.getAnnotation(Reference.class) != null) {
+			ts.reference = true;
 		}
 		if (returnType instanceof ParameterizedType) {
 			ParameterizedType pt = (ParameterizedType) returnType;
