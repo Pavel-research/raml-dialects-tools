@@ -1,0 +1,383 @@
+[{
+  "@type": [
+    "http://raml.org/vocabularies/document#Document",
+    "http://raml.org/vocabularies/document#Fragment",
+    "http://raml.org/vocabularies/document#Module",
+    "http://raml.org/vocabularies/document#Unit"
+  ],
+  "@id": "file:/shared/src/test/resources/vocabularies/validation_dialect.raml",
+  "http://raml.org/vocabularies/document#encodes": [{
+    "http://raml.org/vocabularies/meta#raml": [{
+      "@type": ["http://raml.org/vocabularies/meta#Document"],
+      "http://raml.org/vocabularies/meta#module": [{
+        "@type": ["http://raml.org/vocabularies/meta#ModuleDeclaration"],
+        "http://raml.org/vocabularies/meta#declares": [{
+          "@type": ["http://raml.org/vocabularies/meta#Declaration"],
+          "http://raml.org/vocabularies/meta#declaredNode": [{"@value": "file:/shared/src/test/resources/vocabularies/validation_dialect.raml#queryValidationNode"}],
+          "@id": "file:/shared/src/test/resources/vocabularies/validation_dialect.raml#raml/module/validations",
+          "http://raml.org/vocabularies/meta#name": [{"@value": "validations"}]
+        }],
+        "@id": "file:/shared/src/test/resources/vocabularies/validation_dialect.raml#raml/module"
+      }],
+      "http://raml.org/vocabularies/meta#document": [{
+        "@type": ["http://raml.org/vocabularies/meta#DocumentContentDeclaration"],
+        "http://raml.org/vocabularies/meta#encodes": [{"@value": "file:/shared/src/test/resources/vocabularies/validation_dialect.raml#profileNode"}],
+        "@id": "file:/shared/src/test/resources/vocabularies/validation_dialect.raml#raml/document"
+      }],
+      "@id": "file:/shared/src/test/resources/vocabularies/validation_dialect.raml#raml",
+      "http://raml.org/vocabularies/meta#fragments": [{
+        "@type": ["http://raml.org/vocabularies/meta#FragmentsDeclaration"],
+        "http://raml.org/vocabularies/meta#encodes": [{
+          "@type": ["http://raml.org/vocabularies/meta#Declaration"],
+          "http://raml.org/vocabularies/meta#declaredNode": [{"@value": "file:/shared/src/test/resources/vocabularies/validation_dialect.raml#queryValidationNode"}],
+          "@id": "file:/shared/src/test/resources/vocabularies/validation_dialect.raml#raml/fragments/Validation",
+          "http://raml.org/vocabularies/meta#name": [{"@value": "Validation"}]
+        }],
+        "@id": "file:/shared/src/test/resources/vocabularies/validation_dialect.raml#raml/fragments"
+      }]
+    }],
+    "http://raml.org/vocabularies/meta#version": [{"@value": "1.0"}],
+    "http://raml.org/vocabularies/meta#nodeMappings": [
+      {
+        "@type": ["http://raml.org/vocabularies/meta#NodeDefinition"],
+        "http://raml.org/vocabularies/meta#mapping": [
+          {
+            "@type": ["http://raml.org/vocabularies/meta#PropertyMapping"],
+            "http://raml.org/vocabularies/meta#propertyTerm": [{"@value": "http://raml.org/vocabularies/amf-validation#jsCode"}],
+            "http://raml.org/vocabularies/meta#range": [{"@value": "http://www.w3.org/2001/XMLSchema#string"}],
+            "@id": "file:/shared/src/test/resources/vocabularies/validation_dialect.raml#functionConstraintNode/code",
+            "http://raml.org/vocabularies/meta#name": [{"@value": "code"}]
+          },
+          {
+            "@type": ["http://raml.org/vocabularies/meta#PropertyMapping"],
+            "http://raml.org/vocabularies/meta#propertyTerm": [{"@value": "http://www.w3.org/ns/shacl#jsFunctionName"}],
+            "http://raml.org/vocabularies/meta#range": [{"@value": "http://www.w3.org/2001/XMLSchema#string"}],
+            "@id": "file:/shared/src/test/resources/vocabularies/validation_dialect.raml#functionConstraintNode/functionName",
+            "http://raml.org/vocabularies/meta#name": [{"@value": "functionName"}]
+          },
+          {
+            "@type": ["http://raml.org/vocabularies/meta#PropertyMapping"],
+            "http://raml.org/vocabularies/meta#allowMultiple": [{"@value": true}],
+            "http://raml.org/vocabularies/meta#propertyTerm": [{"@value": "http://www.w3.org/ns/shacl#jsLibrary"}],
+            "http://raml.org/vocabularies/meta#range": [{"@value": "http://www.w3.org/2001/XMLSchema#string"}],
+            "@id": "file:/shared/src/test/resources/vocabularies/validation_dialect.raml#functionConstraintNode/libraries",
+            "http://raml.org/vocabularies/meta#name": [{"@value": "libraries"}]
+          },
+          {
+            "@type": ["http://raml.org/vocabularies/meta#PropertyMapping"],
+            "http://raml.org/vocabularies/meta#propertyTerm": [{"@value": "http://www.w3.org/ns/shacl#message"}],
+            "http://raml.org/vocabularies/meta#range": [{"@value": "http://www.w3.org/2001/XMLSchema#string"}],
+            "@id": "file:/shared/src/test/resources/vocabularies/validation_dialect.raml#functionConstraintNode/message",
+            "http://raml.org/vocabularies/meta#name": [{"@value": "message"}]
+          }
+        ],
+        "http://raml.org/vocabularies/meta#classTerm": [{"@id": "shacl.JSConstraint"}],
+        "@id": "file:/shared/src/test/resources/vocabularies/validation_dialect.raml#functionConstraintNode",
+        "http://raml.org/vocabularies/meta#name": [{"@value": "functionConstraintNode"}]
+      },
+      {
+        "@type": ["http://raml.org/vocabularies/meta#NodeDefinition"],
+        "http://raml.org/vocabularies/meta#mapping": [
+          {
+            "@type": ["http://raml.org/vocabularies/meta#PropertyMapping"],
+            "http://raml.org/vocabularies/meta#propertyTerm": [{"@value": "http://www.w3.org/ns/shacl#maxInclusive"}],
+            "http://raml.org/vocabularies/meta#range": [{"@value": "http://www.w3.org/2001/XMLSchema#float"}],
+            "@id": "file:/shared/src/test/resources/vocabularies/validation_dialect.raml#propertyConstraintNode/maxInclusive",
+            "http://raml.org/vocabularies/meta#name": [{"@value": "maxInclusive"}]
+          },
+          {
+            "@type": ["http://raml.org/vocabularies/meta#PropertyMapping"],
+            "http://raml.org/vocabularies/meta#propertyTerm": [{"@value": "http://www.w3.org/ns/shacl#minExclusive"}],
+            "http://raml.org/vocabularies/meta#range": [{"@value": "http://www.w3.org/2001/XMLSchema#float"}],
+            "@id": "file:/shared/src/test/resources/vocabularies/validation_dialect.raml#propertyConstraintNode/minExclusive",
+            "http://raml.org/vocabularies/meta#name": [{"@value": "minExclusive"}]
+          },
+          {
+            "@type": ["http://raml.org/vocabularies/meta#PropertyMapping"],
+            "http://raml.org/vocabularies/meta#propertyTerm": [{"@value": "http://www.w3.org/ns/shacl#minInclusive"}],
+            "http://raml.org/vocabularies/meta#range": [{"@value": "http://www.w3.org/2001/XMLSchema#float"}],
+            "@id": "file:/shared/src/test/resources/vocabularies/validation_dialect.raml#propertyConstraintNode/minInclusive",
+            "http://raml.org/vocabularies/meta#name": [{"@value": "minInclusive"}]
+          },
+          {
+            "@type": ["http://raml.org/vocabularies/meta#PropertyMapping"],
+            "http://raml.org/vocabularies/meta#allowMultiple": [{"@value": true}],
+            "http://raml.org/vocabularies/meta#propertyTerm": [{"@value": "http://www.w3.org/ns/shacl#in"}],
+            "http://raml.org/vocabularies/meta#range": [{"@value": "http://www.w3.org/2001/XMLSchema#string"}],
+            "@id": "file:/shared/src/test/resources/vocabularies/validation_dialect.raml#propertyConstraintNode/in",
+            "http://raml.org/vocabularies/meta#name": [{"@value": "in"}]
+          },
+          {
+            "@type": ["http://raml.org/vocabularies/meta#PropertyMapping"],
+            "http://raml.org/vocabularies/meta#propertyTerm": [{"@value": "http://raml.org/vocabularies/amf-validation#ramlPropertyId"}],
+            "http://raml.org/vocabularies/meta#range": [{"@value": "http://www.w3.org/2001/XMLSchema#string"}],
+            "http://raml.org/vocabularies/meta#mandatory": [{"@value": true}],
+            "@id": "file:/shared/src/test/resources/vocabularies/validation_dialect.raml#propertyConstraintNode/name",
+            "http://raml.org/vocabularies/meta#name": [{"@value": "name"}]
+          },
+          {
+            "@type": ["http://raml.org/vocabularies/meta#PropertyMapping"],
+            "http://raml.org/vocabularies/meta#propertyTerm": [{"@value": "http://www.w3.org/ns/shacl#pattern"}],
+            "http://raml.org/vocabularies/meta#range": [{"@value": "http://www.w3.org/2001/XMLSchema#string"}],
+            "@id": "file:/shared/src/test/resources/vocabularies/validation_dialect.raml#propertyConstraintNode/pattern",
+            "http://raml.org/vocabularies/meta#name": [{"@value": "pattern"}]
+          },
+          {
+            "@type": ["http://raml.org/vocabularies/meta#PropertyMapping"],
+            "http://raml.org/vocabularies/meta#propertyTerm": [{"@value": "http://www.w3.org/ns/shacl#maxExclusive"}],
+            "http://raml.org/vocabularies/meta#range": [{"@value": "http://www.w3.org/2001/XMLSchema#float"}],
+            "@id": "file:/shared/src/test/resources/vocabularies/validation_dialect.raml#propertyConstraintNode/maxExclusive",
+            "http://raml.org/vocabularies/meta#name": [{"@value": "maxExclusive"}]
+          },
+          {
+            "@type": ["http://raml.org/vocabularies/meta#PropertyMapping"],
+            "http://raml.org/vocabularies/meta#propertyTerm": [{"@value": "http://www.w3.org/ns/shacl#minCount"}],
+            "http://raml.org/vocabularies/meta#range": [{"@value": "http://www.w3.org/2001/XMLSchema#float"}],
+            "@id": "file:/shared/src/test/resources/vocabularies/validation_dialect.raml#propertyConstraintNode/minCount",
+            "http://raml.org/vocabularies/meta#name": [{"@value": "minCount"}]
+          },
+          {
+            "@type": ["http://raml.org/vocabularies/meta#PropertyMapping"],
+            "http://raml.org/vocabularies/meta#propertyTerm": [{"@value": "http://www.w3.org/ns/shacl#message"}],
+            "http://raml.org/vocabularies/meta#range": [{"@value": "http://www.w3.org/2001/XMLSchema#string"}],
+            "@id": "file:/shared/src/test/resources/vocabularies/validation_dialect.raml#propertyConstraintNode/message",
+            "http://raml.org/vocabularies/meta#name": [{"@value": "message"}]
+          },
+          {
+            "@type": ["http://raml.org/vocabularies/meta#PropertyMapping"],
+            "http://raml.org/vocabularies/meta#propertyTerm": [{"@value": "http://www.w3.org/ns/shacl#maxCount"}],
+            "http://raml.org/vocabularies/meta#range": [{"@value": "http://www.w3.org/2001/XMLSchema#float"}],
+            "@id": "file:/shared/src/test/resources/vocabularies/validation_dialect.raml#propertyConstraintNode/maxCount",
+            "http://raml.org/vocabularies/meta#name": [{"@value": "maxCount"}]
+          }
+        ],
+        "http://raml.org/vocabularies/meta#classTerm": [{"@id": "shacl.PropertyShape"}],
+        "@id": "file:/shared/src/test/resources/vocabularies/validation_dialect.raml#propertyConstraintNode",
+        "http://raml.org/vocabularies/meta#name": [{"@value": "propertyConstraintNode"}]
+      },
+      {
+        "@type": ["http://raml.org/vocabularies/meta#NodeDefinition"],
+        "http://raml.org/vocabularies/meta#mapping": [
+          {
+            "@type": ["http://raml.org/vocabularies/meta#PropertyMapping"],
+            "http://raml.org/vocabularies/meta#allowMultiple": [{"@value": true}],
+            "http://raml.org/vocabularies/meta#propertyTerm": [{"@value": "http://raml.org/vocabularies/amf-validation#ramlClassId"}],
+            "http://raml.org/vocabularies/meta#range": [{"@value": "http://www.w3.org/2001/XMLSchema#string"}],
+            "@id": "file:/shared/src/test/resources/vocabularies/validation_dialect.raml#functionValidationNode/targetClass",
+            "http://raml.org/vocabularies/meta#name": [{"@value": "targetClass"}]
+          },
+          {
+            "@type": ["http://raml.org/vocabularies/meta#PropertyMapping"],
+            "http://raml.org/vocabularies/meta#propertyTerm": [{"@value": "http://schema.org/name"}],
+            "http://raml.org/vocabularies/meta#range": [{"@value": "http://www.w3.org/2001/XMLSchema#string"}],
+            "@id": "file:/shared/src/test/resources/vocabularies/validation_dialect.raml#functionValidationNode/name",
+            "http://raml.org/vocabularies/meta#name": [{"@value": "name"}]
+          },
+          {
+            "@type": ["http://raml.org/vocabularies/meta#PropertyMapping"],
+            "http://raml.org/vocabularies/meta#propertyTerm": [{"@value": "http://www.w3.org/ns/shacl#message"}],
+            "http://raml.org/vocabularies/meta#range": [{"@value": "http://www.w3.org/2001/XMLSchema#string"}],
+            "@id": "file:/shared/src/test/resources/vocabularies/validation_dialect.raml#functionValidationNode/message",
+            "http://raml.org/vocabularies/meta#name": [{"@value": "message"}]
+          },
+          {
+            "@type": ["http://raml.org/vocabularies/meta#PropertyMapping"],
+            "http://raml.org/vocabularies/meta#propertyTerm": [{"@value": "http://www.w3.org/ns/shacl#js"}],
+            "http://raml.org/vocabularies/meta#range": [{"@value": "file:/shared/src/test/resources/vocabularies/validation_dialect.raml#functionConstraintNode"}],
+            "http://raml.org/vocabularies/meta#mandatory": [{"@value": true}],
+            "@id": "file:/shared/src/test/resources/vocabularies/validation_dialect.raml#functionValidationNode/functionConstraint",
+            "http://raml.org/vocabularies/meta#name": [{"@value": "functionConstraint"}]
+          }
+        ],
+        "http://raml.org/vocabularies/meta#classTerm": [{"@id": "validation.FunctionValidation"}],
+        "@id": "file:/shared/src/test/resources/vocabularies/validation_dialect.raml#functionValidationNode",
+        "http://raml.org/vocabularies/meta#name": [{"@value": "functionValidationNode"}]
+      },
+      {
+        "@type": ["http://raml.org/vocabularies/meta#NodeDefinition"],
+        "http://raml.org/vocabularies/meta#mapping": [
+          {
+            "@type": ["http://raml.org/vocabularies/meta#PropertyMapping"],
+            "http://raml.org/vocabularies/meta#allowMultiple": [{"@value": true}],
+            "http://raml.org/vocabularies/meta#propertyTerm": [{"@value": "http://raml.org/vocabularies/amf-validation#ramlClassId"}],
+            "http://raml.org/vocabularies/meta#range": [{"@value": "http://www.w3.org/2001/XMLSchema#string"}],
+            "@id": "file:/shared/src/test/resources/vocabularies/validation_dialect.raml#shapeValidationNode/targetClass",
+            "http://raml.org/vocabularies/meta#name": [{"@value": "targetClass"}]
+          },
+          {
+            "@type": ["http://raml.org/vocabularies/meta#PropertyMapping"],
+            "http://raml.org/vocabularies/meta#propertyTerm": [{"@value": "http://schema.org/name"}],
+            "http://raml.org/vocabularies/meta#range": [{"@value": "http://www.w3.org/2001/XMLSchema#string"}],
+            "@id": "file:/shared/src/test/resources/vocabularies/validation_dialect.raml#shapeValidationNode/name",
+            "http://raml.org/vocabularies/meta#name": [{"@value": "name"}]
+          },
+          {
+            "@type": ["http://raml.org/vocabularies/meta#PropertyMapping"],
+            "http://raml.org/vocabularies/meta#propertyTerm": [{"@value": "http://www.w3.org/ns/shacl#property"}],
+            "http://raml.org/vocabularies/meta#range": [{"@value": "file:/shared/src/test/resources/vocabularies/validation_dialect.raml#propertyConstraintNode"}],
+            "http://raml.org/vocabularies/meta#mandatory": [{"@value": true}],
+            "@id": "file:/shared/src/test/resources/vocabularies/validation_dialect.raml#shapeValidationNode/propertyConstraints",
+            "http://raml.org/vocabularies/meta#hash": [{"@value": "http://raml.org/vocabularies/amf-validation#ramlPropertyId"}],
+            "http://raml.org/vocabularies/meta#name": [{"@value": "propertyConstraints"}],
+            "http://raml.org/vocabularies/meta#asMap": [{"@value": true}]
+          },
+          {
+            "@type": ["http://raml.org/vocabularies/meta#PropertyMapping"],
+            "http://raml.org/vocabularies/meta#propertyTerm": [{"@value": "http://www.w3.org/ns/shacl#message"}],
+            "http://raml.org/vocabularies/meta#range": [{"@value": "http://www.w3.org/2001/XMLSchema#string"}],
+            "@id": "file:/shared/src/test/resources/vocabularies/validation_dialect.raml#shapeValidationNode/message",
+            "http://raml.org/vocabularies/meta#name": [{"@value": "message"}]
+          }
+        ],
+        "http://raml.org/vocabularies/meta#classTerm": [{"@id": "validation.ShapeValidation"}],
+        "@id": "file:/shared/src/test/resources/vocabularies/validation_dialect.raml#shapeValidationNode",
+        "http://raml.org/vocabularies/meta#name": [{"@value": "shapeValidationNode"}]
+      },
+      {
+        "@type": ["http://raml.org/vocabularies/meta#NodeDefinition"],
+        "http://raml.org/vocabularies/meta#mapping": [
+          {
+            "@type": ["http://raml.org/vocabularies/meta#PropertyMapping"],
+            "http://raml.org/vocabularies/meta#allowMultiple": [{"@value": true}],
+            "http://raml.org/vocabularies/meta#propertyTerm": [{"@value": "http://raml.org/vocabularies/amf-validation#ramlClassId"}],
+            "http://raml.org/vocabularies/meta#range": [{"@value": "http://www.w3.org/2001/XMLSchema#string"}],
+            "@id": "file:/shared/src/test/resources/vocabularies/validation_dialect.raml#queryValidationNode/targetClass",
+            "http://raml.org/vocabularies/meta#name": [{"@value": "targetClass"}]
+          },
+          {
+            "@type": ["http://raml.org/vocabularies/meta#PropertyMapping"],
+            "http://raml.org/vocabularies/meta#propertyTerm": [{"@value": "http://schema.org/name"}],
+            "http://raml.org/vocabularies/meta#range": [{"@value": "http://www.w3.org/2001/XMLSchema#string"}],
+            "@id": "file:/shared/src/test/resources/vocabularies/validation_dialect.raml#queryValidationNode/name",
+            "http://raml.org/vocabularies/meta#name": [{"@value": "name"}]
+          },
+          {
+            "@type": ["http://raml.org/vocabularies/meta#PropertyMapping"],
+            "http://raml.org/vocabularies/meta#propertyTerm": [{"@value": "http://www.w3.org/ns/shacl#property"}],
+            "http://raml.org/vocabularies/meta#range": [{"@value": "file:/shared/src/test/resources/vocabularies/validation_dialect.raml#propertyConstraintNode"}],
+            "@id": "file:/shared/src/test/resources/vocabularies/validation_dialect.raml#queryValidationNode/propertyConstraints",
+            "http://raml.org/vocabularies/meta#hash": [{"@value": "http://raml.org/vocabularies/amf-validation#ramlPropertyId"}],
+            "http://raml.org/vocabularies/meta#name": [{"@value": "propertyConstraints"}],
+            "http://raml.org/vocabularies/meta#asMap": [{"@value": true}]
+          },
+          {
+            "@type": ["http://raml.org/vocabularies/meta#PropertyMapping"],
+            "http://raml.org/vocabularies/meta#propertyTerm": [{"@value": "http://www.w3.org/ns/shacl#message"}],
+            "http://raml.org/vocabularies/meta#range": [{"@value": "http://www.w3.org/2001/XMLSchema#string"}],
+            "@id": "file:/shared/src/test/resources/vocabularies/validation_dialect.raml#queryValidationNode/message",
+            "http://raml.org/vocabularies/meta#name": [{"@value": "message"}]
+          },
+          {
+            "@type": ["http://raml.org/vocabularies/meta#PropertyMapping"],
+            "http://raml.org/vocabularies/meta#propertyTerm": [{"@value": "http://raml.org/vocabularies/amf-validation#targetQuery"}],
+            "http://raml.org/vocabularies/meta#range": [{"@value": "http://www.w3.org/2001/XMLSchema#string"}],
+            "http://raml.org/vocabularies/meta#mandatory": [{"@value": true}],
+            "@id": "file:/shared/src/test/resources/vocabularies/validation_dialect.raml#queryValidationNode/targetQuery",
+            "http://raml.org/vocabularies/meta#name": [{"@value": "targetQuery"}]
+          }
+        ],
+        "http://raml.org/vocabularies/meta#classTerm": [{"@id": "validation.QueryValidation"}],
+        "@id": "file:/shared/src/test/resources/vocabularies/validation_dialect.raml#queryValidationNode",
+        "http://raml.org/vocabularies/meta#name": [{"@value": "queryValidationNode"}]
+      },
+      {
+        "@type": ["http://raml.org/vocabularies/meta#NodeDefinition"],
+        "http://raml.org/vocabularies/meta#mapping": [
+          {
+            "@type": ["http://raml.org/vocabularies/meta#PropertyMapping"],
+            "http://raml.org/vocabularies/meta#propertyTerm": [{"@value": "http://raml.org/vocabularies/amf-validation#extendsProfile"}],
+            "http://raml.org/vocabularies/meta#range": [{"@value": "http://www.w3.org/2001/XMLSchema#string"}],
+            "@id": "file:/shared/src/test/resources/vocabularies/validation_dialect.raml#profileNode/extends",
+            "http://raml.org/vocabularies/meta#name": [{"@value": "extends"}]
+          },
+          {
+            "@type": ["http://raml.org/vocabularies/meta#PropertyMapping"],
+            "http://raml.org/vocabularies/meta#propertyTerm": [{"@value": "http://schema.org/name"}],
+            "http://raml.org/vocabularies/meta#range": [{"@value": "http://www.w3.org/2001/XMLSchema#string"}],
+            "http://raml.org/vocabularies/meta#mandatory": [{"@value": true}],
+            "@id": "file:/shared/src/test/resources/vocabularies/validation_dialect.raml#profileNode/profile",
+            "http://raml.org/vocabularies/meta#name": [{"@value": "profile"}]
+          },
+          {
+            "@type": ["http://raml.org/vocabularies/meta#PropertyMapping"],
+            "http://raml.org/vocabularies/meta#allowMultiple": [{"@value": true}],
+            "http://raml.org/vocabularies/meta#propertyTerm": [{"@value": "http://raml.org/vocabularies/amf-validation#setSeverityViolation"}],
+            "http://raml.org/vocabularies/meta#range": [{"@value": "http://www.w3.org/2001/XMLSchema#string"}],
+            "@id": "file:/shared/src/test/resources/vocabularies/validation_dialect.raml#profileNode/violation",
+            "http://raml.org/vocabularies/meta#name": [{"@value": "violation"}]
+          },
+          {
+            "@type": ["http://raml.org/vocabularies/meta#PropertyMapping"],
+            "http://raml.org/vocabularies/meta#propertyTerm": [{"@value": "http://schema.org/description"}],
+            "http://raml.org/vocabularies/meta#range": [{"@value": "http://www.w3.org/2001/XMLSchema#string"}],
+            "@id": "file:/shared/src/test/resources/vocabularies/validation_dialect.raml#profileNode/description",
+            "http://raml.org/vocabularies/meta#name": [{"@value": "description"}]
+          },
+          {
+            "@type": ["http://raml.org/vocabularies/meta#PropertyMapping"],
+            "http://raml.org/vocabularies/meta#allowMultiple": [{"@value": true}],
+            "http://raml.org/vocabularies/meta#propertyTerm": [{"@value": "http://raml.org/vocabularies/amf-validation#setSeverityWarning"}],
+            "http://raml.org/vocabularies/meta#range": [{"@value": "http://www.w3.org/2001/XMLSchema#string"}],
+            "@id": "file:/shared/src/test/resources/vocabularies/validation_dialect.raml#profileNode/warning",
+            "http://raml.org/vocabularies/meta#name": [{"@value": "warning"}]
+          },
+          {
+            "@type": ["http://raml.org/vocabularies/meta#PropertyMapping"],
+            "http://raml.org/vocabularies/meta#allowMultiple": [{"@value": true}],
+            "http://raml.org/vocabularies/meta#propertyTerm": [{"@value": "http://raml.org/vocabularies/amf-validation#disableValidation"}],
+            "http://raml.org/vocabularies/meta#range": [{"@value": "http://www.w3.org/2001/XMLSchema#string"}],
+            "@id": "file:/shared/src/test/resources/vocabularies/validation_dialect.raml#profileNode/disabled",
+            "http://raml.org/vocabularies/meta#name": [{"@value": "disabled"}]
+          },
+          {
+            "@type": ["http://raml.org/vocabularies/meta#PropertyMapping"],
+            "http://raml.org/vocabularies/meta#propertyTerm": [{"@value": "http://raml.org/vocabularies/amf-validation#validations"}],
+            "http://raml.org/vocabularies/meta#range": [
+              {"@value": "file:/shared/src/test/resources/vocabularies/validation_dialect.raml#shapeValidationNode"},
+              {"@value": "file:/shared/src/test/resources/vocabularies/validation_dialect.raml#queryValidationNode"},
+              {"@value": "file:/shared/src/test/resources/vocabularies/validation_dialect.raml#functionValidationNode"}
+            ],
+            "@id": "file:/shared/src/test/resources/vocabularies/validation_dialect.raml#profileNode/validations",
+            "http://raml.org/vocabularies/meta#hash": [{"@value": "http://schema.org/name"}],
+            "http://raml.org/vocabularies/meta#name": [{"@value": "validations"}],
+            "http://raml.org/vocabularies/meta#asMap": [{"@value": true}]
+          },
+          {
+            "@type": ["http://raml.org/vocabularies/meta#PropertyMapping"],
+            "http://raml.org/vocabularies/meta#allowMultiple": [{"@value": true}],
+            "http://raml.org/vocabularies/meta#propertyTerm": [{"@value": "http://raml.org/vocabularies/amf-validation#setSeverityInfo"}],
+            "http://raml.org/vocabularies/meta#range": [{"@value": "http://www.w3.org/2001/XMLSchema#string"}],
+            "@id": "file:/shared/src/test/resources/vocabularies/validation_dialect.raml#profileNode/info",
+            "http://raml.org/vocabularies/meta#name": [{"@value": "info"}]
+          }
+        ],
+        "http://raml.org/vocabularies/meta#classTerm": [{"@id": "validation.Profile"}],
+        "@id": "file:/shared/src/test/resources/vocabularies/validation_dialect.raml#profileNode",
+        "http://raml.org/vocabularies/meta#name": [{"@value": "profileNode"}]
+      }
+    ],
+    "@type": ["http://raml.org/vocabularies/meta#dialect"],
+    "http://raml.org/vocabularies/meta#dialect": [{"@value": "Validation Profile"}],
+    "@id": "file:/shared/src/test/resources/vocabularies/validation_dialect.raml#",
+    "http://raml.org/vocabularies/meta#external": [
+      {
+        "@type": ["http://raml.org/vocabularies/meta#External"],
+        "http://raml.org/vocabularies/meta#uri": [{"@value": "http://www.w3.org/ns/shacl#"}],
+        "@id": "file:/shared/src/test/resources/vocabularies/validation_dialect.raml#shacl",
+        "http://raml.org/vocabularies/meta#name": [{"@value": "shacl"}]
+      },
+      {
+        "@type": ["http://raml.org/vocabularies/meta#External"],
+        "http://raml.org/vocabularies/meta#uri": [{"@value": "http://schema.org/"}],
+        "@id": "file:/shared/src/test/resources/vocabularies/validation_dialect.raml#schema-org",
+        "http://raml.org/vocabularies/meta#name": [{"@value": "schema-org"}]
+      },
+      {
+        "@type": ["http://raml.org/vocabularies/meta#External"],
+        "http://raml.org/vocabularies/meta#uri": [{"@value": "http://raml.org/vocabularies/amf-validation#"}],
+        "@id": "file:/shared/src/test/resources/vocabularies/validation_dialect.raml#validation",
+        "http://raml.org/vocabularies/meta#name": [{"@value": "validation"}]
+      }
+    ]
+  }]
+}]

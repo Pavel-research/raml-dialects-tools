@@ -1,0 +1,15 @@
+classTerm: shacl.JSConstraint
+mapping: 
+      message:
+        propertyTerm: shacl.message
+        range: string
+      code:
+        propertyTerm: validation.jsCode
+        range: string
+      libraries:
+        propertyTerm: shacl.jsLibrary
+        range: string
+        allowMultiple: true
+      functionName:
+        propertyTerm: shacl.jsFunctionName 
+        range: string

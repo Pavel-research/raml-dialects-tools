@@ -12,7 +12,7 @@ public final class NodeModel {
 
 	private String term;
 
-	private NodeRegistry registry;
+	protected NodeRegistry registry;
 
 	public NodeModel(Class<?> clazz, String term,NodeRegistry registry) {
 		this.targetClass = clazz;
@@ -114,10 +114,10 @@ public final class NodeModel {
 		return obj;
 	}
 
-	public JSONObject writeJSON(Object object) {
+	public JSONObject writeJSON(Object object, JSONSerializationContext jsonSerializationContext) {
 		JSONObject target = new JSONObject();
 		for (PropertyModel m : this.mappings.values()) {
-			m.writeToJSON(object, target);
+			m.writeToJSON(object, target,jsonSerializationContext);
 		}
 		return target;
 	}

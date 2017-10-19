@@ -9,6 +9,7 @@ import org.json.JSONTokener;
 import org.raml.jsonld2toplevel.model.JSONContext;
 import org.raml.jsonld2toplevel.model.JSONLDContext;
 import org.raml.jsonld2toplevel.model.JSONLDSerializationContext;
+import org.raml.jsonld2toplevel.model.JSONSerializationContext;
 import org.raml.jsonld2toplevel.model.NodeModel;
 import org.raml.jsonld2toplevel.model.NodeRegistry;
 
@@ -78,7 +79,7 @@ public final class AMFJSONLD {
 
 	public JSONObject writeJSON(Object object) {
 		NodeModel register = nodeRegistry.register(object.getClass());
-		return register.writeJSON(object);
+		return register.writeJSON(object,new JSONSerializationContext(object, register));
 	}
 
 	public <T> T readFromJSON(JSONObject object, Class<T> t) {

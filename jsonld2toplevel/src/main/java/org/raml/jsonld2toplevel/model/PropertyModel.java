@@ -12,6 +12,7 @@ import java.util.Set;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
+import org.raml.jsonld2toplevel.HasId;
 import org.raml.jsonld2toplevel.annotations.ClassTerm;
 
 public class PropertyModel {
@@ -176,7 +177,7 @@ public class PropertyModel {
 		if (collection.isEmpty()) {
 			return false;
 		}
-		
+
 		for (Object o : collection) {
 			res.put(proceed(o, id, sc));
 		}
@@ -184,11 +185,11 @@ public class PropertyModel {
 	}
 
 	private JSONObject proceed(Object value, String id, JSONLDSerializationContext sc) {
-		
+
 		if (isBuiltin(value)) {
 			JSONObject object = new JSONObject();
 			if (this.reference) {
-				
+
 				object.put(ID, value);
 			} else {
 				object.put(VALUE, value);
@@ -242,14 +243,18 @@ public class PropertyModel {
 		this.dialectName = pName;
 	}
 
-	public void writeToJSON(Object obj, JSONObject target) {
+	public void writeToJSON(Object obj, JSONObject target, JSONSerializationContext jsonSerializationContext) {
 		Object value = getValue(obj);
 		if (value instanceof Collection<?>) {
 			Collection<?> cm = (Collection<?>) value;
 			if (!cm.isEmpty()) {
+				if (cm.size() == 1) {
+					target.put(this.dialectName, obj2json(cm.iterator().next(), jsonSerializationContext));
+					return;
+				}
 				JSONArray arr = new JSONArray();
 				for (Object o : cm) {
-					arr.put(obj2json(o));
+					arr.put(obj2json(o, jsonSerializationContext));
 				}
 				target.put(this.dialectName, arr);
 			}
@@ -259,22 +264,46 @@ public class PropertyModel {
 				JSONObject map = new JSONObject();
 				for (Object key : cm.keySet()) {
 					Object val = cm.get(key);
-					map.put(key.toString(), obj2json(val));
+					Object obj2json = obj2json(val, jsonSerializationContext);
+					map.put(key.toString(), obj2json);
+					removeHash(obj2json);
 				}
 				target.put(this.dialectName, map);
 			}
 		} else {
 			if (value != null) {
-				target.put(this.dialectName, obj2json(value));
+				if (value.equals(Boolean.FALSE)) {
+					return;
+				}
+				target.put(this.dialectName, obj2json(value, jsonSerializationContext));
 			}
 		}
 	}
 
-	private Object obj2json(Object val) {
+	private Object removeHash(Object obj2json) {
+		return ((JSONObject) obj2json).remove(registry.register(this.nodeType).getMappings().get(hash).dialectName);
+	}
+
+	private Object obj2json(Object val, JSONSerializationContext ct) {
+		if (this.resolve&&val instanceof String) {
+			String st=(String) val;
+			val=ct.resolve(st);
+		}
 		if (isBuiltin(val)) {
 			return val;
 		}
-		return registry.register(val.getClass()).writeJSON(val);
+
+		if (this.reference) {
+			if (val instanceof HasId) {
+				return ((HasId) val).shortName();
+			}
+			NodeModel register = this.registry.register(this.nodeType);
+			if (register.valueProperty != null) {
+				return register.valueProperty.getValue(val);
+			}
+			return val.toString();
+		}
+		return registry.register(val.getClass()).writeJSON(val, ct);
 	}
 
 	private boolean isBuiltin(Object value) {
@@ -299,8 +328,8 @@ public class PropertyModel {
 				} else {
 					if (isObject() && this.reference) {
 						ct.delay(v.toString(), this, newInstance);
-					}
-					else append(newInstance, v, original, null);
+					} else
+						append(newInstance, v, original, null);
 				}
 			}
 		} else {
@@ -325,7 +354,7 @@ public class PropertyModel {
 									Object newobject = nodeType.newInstance();
 									setHash(key, newobject);
 									PropertyModel valueProperty = registry.register(nodeType).valueProperty;
-									if (valueProperty.isObject() && valueProperty.reference) {
+									if (valueProperty != null && valueProperty.isObject() && valueProperty.reference) {
 										ct.delay(object.toString(), valueProperty, newobject);
 									} else
 										valueProperty.append(newobject, object, null, key);

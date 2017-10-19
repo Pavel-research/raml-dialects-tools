@@ -1,0 +1,167 @@
+external:
+  shacl:
+    uri: http://www.w3.org/ns/shacl#
+  schema-org:
+    uri: http://schema.org/
+  validation:
+    uri: http://raml.org/vocabularies/amf-validation#
+dialect: Validation Profile
+nodeMappings:
+  functionConstraintNode:
+    mapping:
+      code:
+        propertyTerm: validation.jsCode
+        range: string
+      functionName:
+        propertyTerm: shacl.jsFunctionName
+        range: string
+      libraries:
+        allowMultiple: true
+        propertyTerm: shacl.jsLibrary
+        range: string
+      message:
+        propertyTerm: shacl.message
+        range: string
+    classTerm: shacl.JSConstraint
+  propertyConstraintNode:
+    mapping:
+      maxInclusive:
+        propertyTerm: shacl.maxInclusive
+        range: number
+      minExclusive:
+        propertyTerm: shacl.minExclusive
+        range: number
+      minInclusive:
+        propertyTerm: shacl.minInclusive
+        range: number
+      in:
+        allowMultiple: true
+        propertyTerm: shacl.in
+        range: string
+      name:
+        propertyTerm: validation.ramlPropertyId
+        range: string
+        mandatory: true
+      pattern:
+        propertyTerm: shacl.pattern
+        range: string
+      maxExclusive:
+        propertyTerm: shacl.maxExclusive
+        range: number
+      minCount:
+        propertyTerm: shacl.minCount
+        range: number
+      message:
+        propertyTerm: shacl.message
+        range: string
+      maxCount:
+        propertyTerm: shacl.maxCount
+        range: number
+    classTerm: shacl.PropertyShape
+  functionValidationNode:
+    mapping:
+      targetClass:
+        allowMultiple: true
+        propertyTerm: validation.ramlClassId
+        range: string
+      name:
+        propertyTerm: schema-org.name
+        range: string
+      message:
+        propertyTerm: shacl.message
+        range: string
+      functionConstraint:
+        propertyTerm: shacl.js
+        range: functionConstraintNode
+        mandatory: true
+    classTerm: validation.FunctionValidation
+  shapeValidationNode:
+    mapping:
+      targetClass:
+        allowMultiple: true
+        propertyTerm: validation.ramlClassId
+        range: string
+      name:
+        propertyTerm: schema-org.name
+        range: string
+      propertyConstraints:
+        asMap: true
+        propertyTerm: shacl.property
+        range: propertyConstraintNode
+        mandatory: true
+        hash: validation.ramlPropertyId
+      message:
+        propertyTerm: shacl.message
+        range: string
+    classTerm: validation.ShapeValidation
+  queryValidationNode:
+    mapping:
+      targetClass:
+        allowMultiple: true
+        propertyTerm: validation.ramlClassId
+        range: string
+      name:
+        propertyTerm: schema-org.name
+        range: string
+      propertyConstraints:
+        asMap: true
+        propertyTerm: shacl.property
+        range: propertyConstraintNode
+        hash: validation.ramlPropertyId
+      message:
+        propertyTerm: shacl.message
+        range: string
+      targetQuery:
+        propertyTerm: validation.targetQuery
+        range: string
+        mandatory: true
+    classTerm: validation.QueryValidation
+  profileNode:
+    mapping:
+      extends:
+        propertyTerm: validation.extendsProfile
+        range: string
+      profile:
+        propertyTerm: schema-org.name
+        range: string
+        mandatory: true
+      violation:
+        allowMultiple: true
+        propertyTerm: validation.setSeverityViolation
+        range: string
+      description:
+        propertyTerm: schema-org.description
+        range: string
+      warning:
+        allowMultiple: true
+        propertyTerm: validation.setSeverityWarning
+        range: string
+      disabled:
+        allowMultiple: true
+        propertyTerm: validation.disableValidation
+        range: string
+      validations:
+        asMap: true
+        propertyTerm: validation.validations
+        range:
+        - shapeValidationNode
+        - queryValidationNode
+        - functionValidationNode
+        hash: schema-org.name
+      info:
+        allowMultiple: true
+        propertyTerm: validation.setSeverityInfo
+        range: string
+    classTerm: validation.Profile
+raml:
+  module:
+    declares:
+      validations:
+        declaredNode: queryValidationNode
+  document:
+    encodes: profileNode
+  fragments:
+    encodes:
+      Validation:
+        declaredNode: queryValidationNode
+version: '1.0'
