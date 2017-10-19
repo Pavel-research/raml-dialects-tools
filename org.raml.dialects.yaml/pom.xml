@@ -27,9 +27,9 @@
 			<version>5.0.0-ALPHA</version>
 			<scope>test</scope>
 		</dependency>
-		<dependency>
+		<dependency> 
 			<groupId>com.onpositive.aml</groupId>
-			<artifactId>org.raml.amfjsonld</artifactId>
+			<artifactId>org.raml.dialects.core</artifactId>
 			<version>${project.version}</version>
 		</dependency>
 		<dependency>
