@@ -1,4 +1,4 @@
-package org.raml.jsonld2toplevel.model;
+package org.raml.dialecs.core.model;
 
 import java.util.ArrayList;
 import java.util.HashSet;

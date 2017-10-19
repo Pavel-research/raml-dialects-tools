@@ -1,10 +1,10 @@
-package org.raml.jsonld2toplevel.annotations;
+package org.raml.dialects.core.annotations;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
-import org.raml.jsonld2toplevel.DefaultParser;
-import org.raml.jsonld2toplevel.IParser;
+import org.raml.dialects.core.DefaultParser;
+import org.raml.dialects.core.IParser;
 
 @Retention(RetentionPolicy.RUNTIME)
 public @interface DomainRootElement {

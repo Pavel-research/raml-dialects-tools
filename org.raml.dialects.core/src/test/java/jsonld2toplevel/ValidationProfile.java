@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
-import org.raml.jsonld2toplevel.annotations.ClassTerm;
-import org.raml.jsonld2toplevel.annotations.PropertyTerm;
+import org.raml.dialects.core.annotations.ClassTerm;
+import org.raml.dialects.core.annotations.PropertyTerm;
 
 @ClassTerm("http://raml.org/vocabularies/amf-validation#Profile")
 public class ValidationProfile {

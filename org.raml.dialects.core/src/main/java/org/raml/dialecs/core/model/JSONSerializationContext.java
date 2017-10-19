@@ -1,4 +1,4 @@
-package org.raml.jsonld2toplevel.model;
+package org.raml.dialecs.core.model;
 
 import java.util.HashMap;
 import java.util.LinkedHashMap;

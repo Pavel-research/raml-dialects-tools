@@ -1,8 +1,8 @@
 package jsonld2toplevel;
 
-import org.raml.jsonld2toplevel.annotations.ClassTerm;
-import org.raml.jsonld2toplevel.annotations.Mandatory;
-import org.raml.jsonld2toplevel.annotations.PropertyTerm;
+import org.raml.dialects.core.annotations.ClassTerm;
+import org.raml.dialects.core.annotations.Mandatory;
+import org.raml.dialects.core.annotations.PropertyTerm;
 
 @ClassTerm("http://raml.org/vocabularies/amf-validation#QueryValidation")
 public class QueryValidation extends ValidationRule{

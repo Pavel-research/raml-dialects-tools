@@ -1,4 +1,4 @@
-package org.raml.jsonld2toplevel.model;
+package org.raml.dialecs.core.model;
 
 import java.lang.reflect.AnnotatedElement;
 import java.lang.reflect.Field;
@@ -12,15 +12,15 @@ import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-import org.raml.jsonld2toplevel.annotations.AlsoMappedTo;
-import org.raml.jsonld2toplevel.annotations.CanBeValue;
-import org.raml.jsonld2toplevel.annotations.ClassTerm;
-import org.raml.jsonld2toplevel.annotations.Hash;
-import org.raml.jsonld2toplevel.annotations.Mandatory;
-import org.raml.jsonld2toplevel.annotations.NeedsResolving;
-import org.raml.jsonld2toplevel.annotations.DialectPropertyName;
-import org.raml.jsonld2toplevel.annotations.PropertyTerm;
-import org.raml.jsonld2toplevel.annotations.Reference;
+import org.raml.dialects.core.annotations.AlsoMappedTo;
+import org.raml.dialects.core.annotations.CanBeValue;
+import org.raml.dialects.core.annotations.ClassTerm;
+import org.raml.dialects.core.annotations.DialectPropertyName;
+import org.raml.dialects.core.annotations.Hash;
+import org.raml.dialects.core.annotations.Mandatory;
+import org.raml.dialects.core.annotations.NeedsResolving;
+import org.raml.dialects.core.annotations.PropertyTerm;
+import org.raml.dialects.core.annotations.Reference;
 
 public final class NodeRegistry {
 

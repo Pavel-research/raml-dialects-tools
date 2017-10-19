@@ -1,4 +1,4 @@
-package org.raml.jsonld2toplevel;
+package org.raml.dialects.core;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -12,7 +12,7 @@ import java.net.URL;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
 
-import org.raml.jsonld2toplevel.annotations.DomainRootElement;
+import org.raml.dialects.core.annotations.DomainRootElement;
 
 public class DialectRegistry {
 

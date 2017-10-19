@@ -1,9 +1,9 @@
 package org.raml.dialects.toplevel.model;
 
-import org.raml.jsonld2toplevel.annotations.CanBeValue;
-import org.raml.jsonld2toplevel.annotations.ClassTerm;
-import org.raml.jsonld2toplevel.annotations.PropertyTerm;
-import org.raml.jsonld2toplevel.annotations.Reference;
+import org.raml.dialects.core.annotations.CanBeValue;
+import org.raml.dialects.core.annotations.ClassTerm;
+import org.raml.dialects.core.annotations.PropertyTerm;
+import org.raml.dialects.core.annotations.Reference;
 
 @ClassTerm("http://raml.org/vocabularies/meta#Declaration")
 public class Declaration {

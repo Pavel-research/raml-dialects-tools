@@ -1,4 +1,4 @@
-package org.raml.jsonld2toplevel.model;
+package org.raml.dialecs.core.model;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
@@ -12,8 +12,8 @@ import java.util.Set;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
-import org.raml.jsonld2toplevel.HasId;
-import org.raml.jsonld2toplevel.annotations.ClassTerm;
+import org.raml.dialects.core.HasId;
+import org.raml.dialects.core.annotations.ClassTerm;
 
 public class PropertyModel {
 

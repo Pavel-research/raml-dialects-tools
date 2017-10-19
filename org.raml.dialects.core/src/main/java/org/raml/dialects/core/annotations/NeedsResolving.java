@@ -1,4 +1,4 @@
-package org.raml.jsonld2toplevel.annotations;
+package org.raml.dialects.core.annotations;
 
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Retention;

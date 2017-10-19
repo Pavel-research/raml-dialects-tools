@@ -8,8 +8,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.JSONTokener;
 import org.junit.Test;
+import org.raml.dialects.core.AMFJSONLD;
 import org.raml.dialects.toplevel.model.Dialect;
-import org.raml.jsonld2toplevel.AMFJSONLD;
 import org.skyscreamer.jsonassert.JSONAssert;
 import org.yaml.snakeyaml.Yaml;
 

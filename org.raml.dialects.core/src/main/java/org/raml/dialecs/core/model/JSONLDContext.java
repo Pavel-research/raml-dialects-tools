@@ -1,12 +1,12 @@
-package org.raml.jsonld2toplevel.model;
+package org.raml.dialecs.core.model;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 
-import org.raml.jsonld2toplevel.HasId;
-import org.raml.jsonld2toplevel.annotations.BuiltinInstances;
+import org.raml.dialects.core.HasId;
+import org.raml.dialects.core.annotations.BuiltinInstances;
 
 public class JSONLDContext {
 

@@ -2,9 +2,9 @@ package jsonld2toplevel;
 
 import java.util.Map;
 
-import org.raml.jsonld2toplevel.annotations.ClassTerm;
-import org.raml.jsonld2toplevel.annotations.Hash;
-import org.raml.jsonld2toplevel.annotations.PropertyTerm;
+import org.raml.dialects.core.annotations.ClassTerm;
+import org.raml.dialects.core.annotations.Hash;
+import org.raml.dialects.core.annotations.PropertyTerm;
 
 @ClassTerm("http://raml.org/vocabularies/meta#ModuleDeclaration")
 public class ModuleDeclaration {

@@ -1,4 +1,4 @@
-package org.raml.jsonld2toplevel;
+package org.raml.dialects.core;
 
 public interface ICanResolveIds {
 

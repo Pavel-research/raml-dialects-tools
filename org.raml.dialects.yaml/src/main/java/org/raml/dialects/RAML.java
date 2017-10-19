@@ -1,6 +1,6 @@
 package org.raml.dialects;
 
-import org.raml.jsonld2toplevel.IDataAdapter;
+import org.raml.dialects.core.IDataAdapter;
 
 public class RAML extends YAML implements IDataAdapter{
 

@@ -1,9 +1,9 @@
-package org.raml.jsonld2toplevel.annotations;
+package org.raml.dialects.core.annotations;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
 @Retention(RetentionPolicy.RUNTIME)
-public @interface BuiltinInstances {
-	Class<?>[] value();
+public @interface CanBeValue {
+
 }

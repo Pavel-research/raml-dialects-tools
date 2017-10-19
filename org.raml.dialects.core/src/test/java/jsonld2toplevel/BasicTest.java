@@ -4,7 +4,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import org.json.JSONTokener;
 import org.junit.Test;
-import org.raml.jsonld2toplevel.AMFJSONLD;
+import org.raml.dialects.core.AMFJSONLD;
 import org.skyscreamer.jsonassert.JSONAssert;
 
 import junit.framework.TestCase;

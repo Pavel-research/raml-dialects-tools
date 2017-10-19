@@ -1,10 +1,10 @@
-package org.raml.jsonld2toplevel.model;
+package org.raml.dialecs.core.model;
 
 import java.util.LinkedHashMap;
 
 import org.json.JSONObject;
-import org.raml.jsonld2toplevel.HasId;
-import org.raml.jsonld2toplevel.ICanResolveIds;
+import org.raml.dialects.core.HasId;
+import org.raml.dialects.core.ICanResolveIds;
 
 public final class JSONContext extends JSONLDContext {
 

@@ -2,12 +2,12 @@ package org.raml.dialects.toplevel.model;
 
 import java.util.Map;
 
-import org.raml.jsonld2toplevel.annotations.BuiltinInstances;
-import org.raml.jsonld2toplevel.annotations.ClassTerm;
-import org.raml.jsonld2toplevel.annotations.DialectPropertyName;
-import org.raml.jsonld2toplevel.annotations.Hash;
-import org.raml.jsonld2toplevel.annotations.PropertyTerm;
-import org.raml.jsonld2toplevel.annotations.Reference;
+import org.raml.dialects.core.annotations.BuiltinInstances;
+import org.raml.dialects.core.annotations.ClassTerm;
+import org.raml.dialects.core.annotations.DialectPropertyName;
+import org.raml.dialects.core.annotations.Hash;
+import org.raml.dialects.core.annotations.PropertyTerm;
+import org.raml.dialects.core.annotations.Reference;
 
 @ClassTerm("http://raml.org/vocabularies/meta#NodeDefinition")
 @BuiltinInstances(Builtins.class)

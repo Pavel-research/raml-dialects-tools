@@ -1,7 +1,7 @@
 package org.raml.dialects.toplevel.model;
 
-import org.raml.jsonld2toplevel.annotations.ClassTerm;
-import org.raml.jsonld2toplevel.annotations.PropertyTerm;
+import org.raml.dialects.core.annotations.ClassTerm;
+import org.raml.dialects.core.annotations.PropertyTerm;
 
 @ClassTerm("http://raml.org/vocabularies/meta#Document")
 public class Raml {

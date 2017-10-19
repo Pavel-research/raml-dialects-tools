@@ -3,7 +3,7 @@ package org.raml.vocabularies;
 import java.io.Reader;
 import java.net.URI;
 
-import org.raml.jsonld2toplevel.IParser;
+import org.raml.dialects.core.IParser;
 
 public class VocabularyParser implements IParser<Vocabulary>{
 

@@ -5,9 +5,9 @@ import java.net.URI;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
+import org.raml.dialects.core.IDataAdapter;
+import org.raml.dialects.core.JSONOutput;
 import org.raml.dialects.toplevel.model.YAMLAdapter;
-import org.raml.jsonld2toplevel.IDataAdapter;
-import org.raml.jsonld2toplevel.JSONOutput;
 import org.yaml.snakeyaml.Yaml;
 
 public class YAML implements IDataAdapter {

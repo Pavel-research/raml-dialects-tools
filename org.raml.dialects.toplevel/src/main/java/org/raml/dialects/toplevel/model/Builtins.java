@@ -1,6 +1,6 @@
 package org.raml.dialects.toplevel.model;
 
-import org.raml.jsonld2toplevel.HasId;
+import org.raml.dialects.core.HasId;
 
 public class Builtins extends NodeMapping implements HasId{
 

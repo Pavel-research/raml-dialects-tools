@@ -1,8 +1,8 @@
 package jsonld2toplevel;
 
-import org.raml.jsonld2toplevel.annotations.CanBeValue;
-import org.raml.jsonld2toplevel.annotations.ClassTerm;
-import org.raml.jsonld2toplevel.annotations.PropertyTerm;
+import org.raml.dialects.core.annotations.CanBeValue;
+import org.raml.dialects.core.annotations.ClassTerm;
+import org.raml.dialects.core.annotations.PropertyTerm;
 
 @ClassTerm("http://raml.org/vocabularies/meta#External")
 public class External {

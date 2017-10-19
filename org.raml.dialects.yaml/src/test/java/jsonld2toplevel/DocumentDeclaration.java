@@ -1,8 +1,8 @@
 package jsonld2toplevel;
 
-import org.raml.jsonld2toplevel.annotations.ClassTerm;
-import org.raml.jsonld2toplevel.annotations.PropertyTerm;
-import org.raml.jsonld2toplevel.annotations.Reference;
+import org.raml.dialects.core.annotations.ClassTerm;
+import org.raml.dialects.core.annotations.PropertyTerm;
+import org.raml.dialects.core.annotations.Reference;
 
 @ClassTerm("http://raml.org/vocabularies/meta#DocumentContentDeclaration")
 public class DocumentDeclaration {

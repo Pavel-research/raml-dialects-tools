@@ -1,4 +1,4 @@
-package org.raml.jsonld2toplevel;
+package org.raml.dialects.core;
 
 import java.io.InputStream;
 import java.io.Reader;
@@ -6,12 +6,12 @@ import java.io.Reader;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.json.JSONTokener;
-import org.raml.jsonld2toplevel.model.JSONContext;
-import org.raml.jsonld2toplevel.model.JSONLDContext;
-import org.raml.jsonld2toplevel.model.JSONLDSerializationContext;
-import org.raml.jsonld2toplevel.model.JSONSerializationContext;
-import org.raml.jsonld2toplevel.model.NodeModel;
-import org.raml.jsonld2toplevel.model.NodeRegistry;
+import org.raml.dialecs.core.model.JSONContext;
+import org.raml.dialecs.core.model.JSONLDContext;
+import org.raml.dialecs.core.model.JSONLDSerializationContext;
+import org.raml.dialecs.core.model.JSONSerializationContext;
+import org.raml.dialecs.core.model.NodeModel;
+import org.raml.dialecs.core.model.NodeRegistry;
 
 public final class AMFJSONLD {
 

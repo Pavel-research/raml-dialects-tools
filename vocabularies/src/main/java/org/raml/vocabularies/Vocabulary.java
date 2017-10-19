@@ -10,8 +10,8 @@ import java.net.URL;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-import org.raml.jsonld2toplevel.ICanResolveIds;
-import org.raml.jsonld2toplevel.annotations.DomainRootElement;
+import org.raml.dialects.core.ICanResolveIds;
+import org.raml.dialects.core.annotations.DomainRootElement;
 import org.raml.vocabularies.dto.ClassTermDTO;
 import org.raml.vocabularies.dto.PropertyTermDTO;
 import org.raml.vocabularies.dto.VocabularyDTO;

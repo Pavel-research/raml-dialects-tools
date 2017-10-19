@@ -3,9 +3,9 @@ package jsonld2toplevel;
 import org.json.JSONArray;
 import org.json.JSONTokener;
 import org.junit.Test;
+import org.raml.dialects.core.AMFJSONLD;
+import org.raml.dialects.core.DialectRegistry;
 import org.raml.dialects.toplevel.model.YAMLAdapter;
-import org.raml.jsonld2toplevel.AMFJSONLD;
-import org.raml.jsonld2toplevel.DialectRegistry;
 import org.skyscreamer.jsonassert.JSONAssert;
 import org.yaml.snakeyaml.Yaml;
 

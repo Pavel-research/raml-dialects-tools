@@ -1,10 +1,10 @@
-package org.raml.jsonld2toplevel.model;
+package org.raml.dialecs.core.model;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 
 import org.json.JSONObject;
-import org.raml.jsonld2toplevel.HasId;
+import org.raml.dialects.core.HasId;
 
 public final class JSONLDSerializationContext {
 
