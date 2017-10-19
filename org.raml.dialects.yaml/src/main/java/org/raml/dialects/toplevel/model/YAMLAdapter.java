@@ -107,6 +107,7 @@ public class YAMLAdapter {
 			IncludeNode nm = (IncludeNode) o;
 			Yaml yaml = createYAMLInstance(nm.uri);
 			try {
+				//FIXME more correct include resolution
 				if (resolved.containsKey(nm.uri.toString())){
 					return resolved.get(nm.uri.toString());
 				}
