@@ -11,16 +11,16 @@ public class Declaration {
 	@PropertyTerm("http://raml.org/vocabularies/meta#declaredNode")
 	@Reference
 	@CanBeValue
-	protected NodeMapping declaredNode;
+	protected NodeMappingTest declaredNode;
 	
 	@PropertyTerm("http://raml.org/vocabularies/meta#name")
 	protected String name;
 
-	public NodeMapping getDeclaredNode() {
+	public NodeMappingTest getDeclaredNode() {
 		return declaredNode;
 	}
 
-	public void setDeclaredNode(NodeMapping declaredNode) {
+	public void setDeclaredNode(NodeMappingTest declaredNode) {
 		this.declaredNode = declaredNode;
 	}
 

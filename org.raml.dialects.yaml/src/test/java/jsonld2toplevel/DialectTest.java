@@ -10,7 +10,7 @@ import org.raml.vocabularies.Vocabulary;
 
 @ClassTerm("http://raml.org/vocabularies/meta#dialect")
 @DomainRootElement(dependencies=Vocabulary.class)
-public class Dialect {
+public class DialectTest {
 
 	@PropertyTerm("http://raml.org/vocabularies/meta#dialect")
 	protected String dialect;
@@ -26,7 +26,7 @@ public class Dialect {
 	
 	@PropertyTerm("http://raml.org/vocabularies/meta#nodeMappings")
 	@Hash("http://raml.org/vocabularies/meta#name")
-	protected Map<String,NodeMapping>nodeMappings;
+	protected Map<String,NodeMappingTest>nodeMappings;
 	
 	
 	@PropertyTerm("http://raml.org/vocabularies/meta#vocabularies")
@@ -69,11 +69,11 @@ public class Dialect {
 		this.raml = raml;
 	}
 
-	public Map<String, NodeMapping> getNodeMappings() {
+	public Map<String, NodeMappingTest> getNodeMappings() {
 		return nodeMappings;
 	}
 
-	public void setNodeMappings(Map<String, NodeMapping> nodeMappings) {
+	public void setNodeMappings(Map<String, NodeMappingTest> nodeMappings) {
 		this.nodeMappings = nodeMappings;
 	}
 

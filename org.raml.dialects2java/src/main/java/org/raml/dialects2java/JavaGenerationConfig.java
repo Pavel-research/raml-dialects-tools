@@ -12,4 +12,8 @@ public class JavaGenerationConfig {
 		return this.packageName;
 	}
 
+	public boolean isGenerateBuilderMethods() {
+		return false;
+	}
+
 }

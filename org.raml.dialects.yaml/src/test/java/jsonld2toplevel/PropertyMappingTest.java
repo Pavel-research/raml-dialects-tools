@@ -9,7 +9,7 @@ import org.raml.dialects.core.annotations.PropertyTerm;
 import org.raml.dialects.core.annotations.Reference;
 
 @ClassTerm("http://raml.org/vocabularies/meta#PropertyMapping")
-public class PropertyMapping {
+public class PropertyMappingTest {
 
 	@PropertyTerm("http://raml.org/vocabularies/meta#name")
 	protected String name;
@@ -36,7 +36,7 @@ public class PropertyMapping {
 
 	@PropertyTerm("http://raml.org/vocabularies/meta#range")
 	@Reference
-	protected ArrayList<NodeMapping> range;
+	protected ArrayList<NodeMappingTest> range;
 
 	@PropertyTerm("http://raml.org/vocabularies/meta#enum")
 	@DialectPropertyName("enum")
@@ -98,11 +98,11 @@ public class PropertyMapping {
 		this.asMap = asMap;
 	}
 
-	public ArrayList<NodeMapping> getRange() {
+	public ArrayList<NodeMappingTest> getRange() {
 		return range;
 	}
 
-	public void setRange(ArrayList<NodeMapping> range) {
+	public void setRange(ArrayList<NodeMappingTest> range) {
 		this.range = range;
 	}
 

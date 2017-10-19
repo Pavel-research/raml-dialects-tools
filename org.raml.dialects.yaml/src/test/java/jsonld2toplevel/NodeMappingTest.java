@@ -13,7 +13,7 @@ import org.raml.dialects.core.annotations.Reference;
 
 @ClassTerm("http://raml.org/vocabularies/meta#NodeDefinition")
 @BuiltinInstances(Builtins.class)
-public class NodeMapping {
+public class NodeMappingTest {
 
 	@PropertyTerm("http://raml.org/vocabularies/meta#name")
 	@CanBeValue
@@ -27,7 +27,7 @@ public class NodeMapping {
 	@Hash("http://raml.org/vocabularies/meta#name")
 	@PropertyTerm("http://raml.org/vocabularies/meta#mapping")
 	@DialectPropertyName("mapping")
-	protected Map<String, PropertyMapping> mappings;
+	protected Map<String, PropertyMappingTest> mappings;
 
 	public String getName() {
 		return name;
@@ -45,11 +45,11 @@ public class NodeMapping {
 		this.classTerm = classTerm;
 	}
 
-	public Map<String, PropertyMapping> getMappings() {
+	public Map<String, PropertyMappingTest> getMappings() {
 		return mappings;
 	}
 
-	public void setMappings(Map<String, PropertyMapping> mappings) {
+	public void setMappings(Map<String, PropertyMappingTest> mappings) {
 		this.mappings = mappings;
 	}
 }

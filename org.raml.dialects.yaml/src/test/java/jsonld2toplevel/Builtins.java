@@ -2,7 +2,7 @@ package jsonld2toplevel;
 
 import org.raml.dialects.core.HasId;
 
-public class Builtins extends NodeMapping implements HasId{
+public class Builtins extends NodeMappingTest implements HasId{
 
 	private String shortName;
 	private String id;

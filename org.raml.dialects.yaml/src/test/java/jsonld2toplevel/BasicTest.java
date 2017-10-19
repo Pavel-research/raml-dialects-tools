@@ -15,8 +15,8 @@ public class BasicTest extends TestCase {
 
 	@Test
 	public void test() {
-		Dialect readDocument = new AMFJSONLD()
-				.readDocument(BasicTest.class.getResourceAsStream("/validation_dialect.json"), Dialect.class);
+		DialectTest readDocument = new AMFJSONLD()
+				.readDocument(BasicTest.class.getResourceAsStream("/validation_dialect.json"), DialectTest.class);
 		JSONArray write = new AMFJSONLD().writeJSONLD(readDocument,
 				"file:/shared/src/test/resources/vocabularies/validation_dialect.raml");
 		JSONAssert.assertEquals(write,
@@ -26,7 +26,7 @@ public class BasicTest extends TestCase {
 
 	@Test
 	public void test2() {
-		Dialect readDocument = YAMLAdapter.load(BasicTest.class.getResource("/validation.yaml"), Dialect.class);
+		DialectTest readDocument = YAMLAdapter.load(BasicTest.class.getResource("/validation.yaml"), DialectTest.class);
 		JSONArray write = new AMFJSONLD().writeJSONLD(readDocument,
 				"file:/shared/src/test/resources/vocabularies/validation_dialect.raml");
 		JSONAssert.assertEquals(write,
@@ -35,8 +35,8 @@ public class BasicTest extends TestCase {
 
 	@Test
 	public void test21() {
-		Dialect readDocument = YAMLAdapter.load(BasicTest.class.getResource("/validation2.yaml"),
-				Dialect.class);
+		DialectTest readDocument = YAMLAdapter.load(BasicTest.class.getResource("/validation2.yaml"),
+				DialectTest.class);
 		JSONArray write = new AMFJSONLD().writeJSONLD(readDocument,
 				"file:/shared/src/test/resources/vocabularies/validation_dialect.raml");
 		JSONAssert.assertEquals(write,
@@ -45,7 +45,7 @@ public class BasicTest extends TestCase {
 
 	@Test
 	public void test3() {
-		Dialect readDocument = YAMLAdapter.load(BasicTest.class.getResource("/validation.yaml"), Dialect.class);
+		DialectTest readDocument = YAMLAdapter.load(BasicTest.class.getResource("/validation.yaml"), DialectTest.class);
 		String yaml = YAMLAdapter.toYAML(readDocument);
 		Object v1=new Yaml().load(yaml);
 		Object v2=new Yaml().load(BasicTest.class.getResourceAsStream("/gold.yaml"));
@@ -54,8 +54,8 @@ public class BasicTest extends TestCase {
 	
 	@Test
 	public void test4() {
-		Dialect readDocument;
-		readDocument = DialectRegistry.getDefault().parse(BasicTest.class.getResource("/validation3.yaml"), Dialect.class);
+		DialectTest readDocument;
+		readDocument = DialectRegistry.getDefault().parse(BasicTest.class.getResource("/validation3.yaml"), DialectTest.class);
 		String classTerm = readDocument.getRaml().getDocument().getEncodes().getClassTerm();
 		assertEquals(classTerm,"http://raml.org/vocabularies/amf-validation#Profile");
 	}
