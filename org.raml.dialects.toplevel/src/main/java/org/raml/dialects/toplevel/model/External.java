@@ -1,5 +1,6 @@
 package org.raml.dialects.toplevel.model;
 
+import org.raml.jsonld2toplevel.annotations.CanBeValue;
 import org.raml.jsonld2toplevel.annotations.ClassTerm;
 import org.raml.jsonld2toplevel.annotations.PropertyTerm;
 
@@ -10,6 +11,7 @@ public class External {
 	protected String name;
 
 	@PropertyTerm("http://raml.org/vocabularies/meta#uri")
+	@CanBeValue
 	protected String uri;
 
 	public String getName() {

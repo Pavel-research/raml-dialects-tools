@@ -12,6 +12,7 @@ import java.util.Set;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
+import org.raml.jsonld2toplevel.annotations.ClassTerm;
 
 public class PropertyModel {
 
@@ -47,6 +48,8 @@ public class PropertyModel {
 
 	protected boolean resolve;
 
+	protected boolean canBeValue;
+
 	public PropertyModel(String propertyTerm, String dialectName, NodeRegistry reg) {
 		super();
 		this.propertyTerm = propertyTerm;
@@ -56,13 +59,8 @@ public class PropertyModel {
 
 	@SuppressWarnings("unchecked")
 	public void append(Object target, Object newValue, JSONObject oo, String key) {
-
 		try {
-			if (!nodeType.isInstance(newValue)) {
-				if (nodeType == String.class) {
-					newValue = newValue.toString();
-				}
-			}
+			newValue = convertIfNeeded(newValue);
 			if (!allowMultiple && !asMap) {
 				setValue(target, newValue);
 			} else if (allowMultiple) {
@@ -70,7 +68,7 @@ public class PropertyModel {
 				if (object != null) {
 					object.add(newValue);
 				} else {
-					Class<?> type = patch(getType());
+					Class<?> type = newInstanceType(getType());
 
 					Collection<Object> newInstance = (Collection<Object>) type.newInstance();
 					setValue(target, newInstance);
@@ -81,7 +79,7 @@ public class PropertyModel {
 				if (object != null) {
 					object.put(hashValue(oo, key), newValue);
 				} else {
-					Class<?> type = patch(getType());
+					Class<?> type = newInstanceType(getType());
 
 					Map<Object, Object> newInstance = (Map<Object, Object>) type.newInstance();
 					setValue(target, newInstance);
@@ -92,6 +90,15 @@ public class PropertyModel {
 			throw new IllegalStateException(e);
 		}
 
+	}
+
+	private Object convertIfNeeded(Object newValue) {
+		if (!nodeType.isInstance(newValue)) {
+			if (nodeType == String.class) {
+				newValue = newValue.toString();
+			}
+		}
+		return newValue;
 	}
 
 	private Object hashValue(JSONObject oo, String key) {
@@ -131,15 +138,14 @@ public class PropertyModel {
 		}
 	}
 
-	public void writeToJSONLD(JSONObject obj, Object source, String id) {
-
-		JSONArray produce = produce(source, id);
+	public void writeToJSONLD(JSONObject obj, Object source, String id, JSONLDSerializationContext sc) {
+		JSONArray produce = produce(source, id, sc);
 		if (produce != null) {
 			obj.put(this.propertyTerm, produce);
 		}
 	}
 
-	private JSONArray produce(Object source, String id) {
+	private JSONArray produce(Object source, String id, JSONLDSerializationContext sc) {
 		Object value = getValue(source);
 
 		if (value != null) {
@@ -149,44 +155,54 @@ public class PropertyModel {
 			JSONArray res = new JSONArray();
 			if (asMap && value instanceof Map<?, ?>) {
 				Map<?, ?> map = (Map<?, ?>) value;
-				if (!recordCollection(id, res, map.values())) {
+				if (!recordCollection(id, res, map.values(), sc)) {
 					return null;
 				}
 			} else if (value instanceof Collection) {
 				Collection<?> collection = (Collection<?>) value;
-				if (!recordCollection(id, res, collection)) {
+				if (!recordCollection(id, res, collection, sc)) {
 					return null;
 				}
 			} else {
-				res.put(proceed(value, id));
+				res.put(proceed(value, id, sc));
 			}
 			return res;
 		}
 		return null;
 	}
 
-	private boolean recordCollection(String id, JSONArray res, Collection<?> collection) {
+	private boolean recordCollection(String id, JSONArray res, Collection<?> collection,
+			JSONLDSerializationContext sc) {
 		if (collection.isEmpty()) {
 			return false;
 		}
+		
 		for (Object o : collection) {
-			res.put(proceed(o, id));
+			res.put(proceed(o, id, sc));
 		}
 		return true;
 	}
 
-	private JSONObject proceed(Object value, String id) {
+	private JSONObject proceed(Object value, String id, JSONLDSerializationContext sc) {
+		
 		if (isBuiltin(value)) {
 			JSONObject object = new JSONObject();
 			if (this.reference) {
+				
 				object.put(ID, value);
 			} else {
 				object.put(VALUE, value);
 			}
 			return object;
 		} else {
+			if (this.reference) {
+				JSONObject object = new JSONObject();
+				sc.delay(value, object);
+				return object;
+			}
 			NodeModel register = registry.register(value.getClass());
 			String hp = NAME;
+
 			if (this.hash != null) {
 				hp = this.hash;
 			}
@@ -202,11 +218,11 @@ public class PropertyModel {
 			} else {
 				id = id + "/" + localId;
 			}
-			return register.write(value, id);
+			return register.write(value, id, sc);
 		}
 	}
 
-	private Class<?> patch(Class<?> type) {
+	private Class<?> newInstanceType(Class<?> type) {
 		if (type == Set.class) {
 			return LinkedHashSet.class;
 		}
@@ -266,45 +282,79 @@ public class PropertyModel {
 				|| value instanceof Boolean;
 	}
 
-	public void readFromJSON(Object newInstance, Object value, JSONObject original, LinkedHashMap<String, Object> idMap,
-			Context ct) {
+	public void readFromJSON(Object newInstance, Object value, JSONObject original, JSONContext ct, int level) {
 		if (this.resolve) {
 			value = ct.revolve(value.toString());
 		}
 		if (isBuiltin(value)) {
-
-			append(newInstance, value, original, null);
+			if (isObject() && this.reference) {
+				ct.delay(value.toString(), this, newInstance);
+			} else
+				append(newInstance, value, original, null);
 		} else if (value instanceof JSONArray) {
 			JSONArray arr = (JSONArray) value;
 			for (Object v : arr) {
 				if (v instanceof JSONObject) {
-					append(newInstance, parseJSONObject(v, ct), original, null);
+					append(newInstance, parseJSONObject(v, ct, level), original, null);
 				} else {
-					append(newInstance, v, original, null);
+					if (isObject() && this.reference) {
+						ct.delay(v.toString(), this, newInstance);
+					}
+					else append(newInstance, v, original, null);
 				}
 			}
 		} else {
 			JSONObject vObject = (JSONObject) value;
 			if (this.asMap) {
+
 				for (String key : vObject.keySet()) {
 					Object object = vObject.get(key);
 					if (object instanceof JSONObject) {
-						Object parseJSONObject = parseJSONObject(object, ct);
-						NodeModel register = registry.register(parseJSONObject.getClass());
-						PropertyModel propertyModel = register.getMappings().get(hash);
-						propertyModel.setValue(parseJSONObject, key);
+						Object parseJSONObject = parseJSONObject(object, ct, level);
+						setHash(key, parseJSONObject);
 						append(newInstance, parseJSONObject, (JSONObject) object, key);
+						if (level == 0) {
+							ct.record(key, parseJSONObject);
+						}
 					} else {
-						append(newInstance, object, null, key);
+						if (isObject() && this.reference) {
+							ct.delay(value.toString(), this, newInstance);
+						} else {
+							if (isObject()) {
+								try {
+									Object newobject = nodeType.newInstance();
+									setHash(key, newobject);
+									PropertyModel valueProperty = registry.register(nodeType).valueProperty;
+									if (valueProperty.isObject() && valueProperty.reference) {
+										ct.delay(object.toString(), valueProperty, newobject);
+									} else
+										valueProperty.append(newobject, object, null, key);
+									object = newobject;
+								} catch (Exception e) {
+									throw new IllegalStateException(e);
+								}
+							}
+							append(newInstance, object, null, key);
+						}
 					}
 				}
 			} else {
-				append(newInstance, parseJSONObject(vObject, ct), original, null);
+				append(newInstance, parseJSONObject(vObject, ct, level), original, null);
 			}
 		}
 	}
 
-	private Object parseJSONObject(Object v, Context ct) {
-		return registry.register(nodeType).readFromJSON((JSONObject) v, null, ct);
+	private void setHash(String key, Object parseJSONObject) {
+		NodeModel register = registry.register(parseJSONObject.getClass());
+		PropertyModel propertyModel = register.getMappings().get(hash);
+		propertyModel.setValue(parseJSONObject, key);
+	}
+
+	private Object parseJSONObject(Object v, JSONContext ct, int level) {
+		return registry.register(nodeType).readFromJSON((JSONObject) v, level + 1, ct);
+	}
+
+	public boolean isObject() {
+		return this.nodeType.getAnnotation(ClassTerm.class) != null;
 	}
 }

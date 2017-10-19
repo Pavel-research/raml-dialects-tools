@@ -24,7 +24,7 @@ public class BasicTest extends TestCase {
 		JSONArray write = new AMFJSONLD().writeJSONLD(readDocument,
 				"file:/shared/src/test/resources/vocabularies/validation_dialect.raml");
 		JSONAssert.assertEquals(write,
-				new JSONArray(new JSONTokener(BasicTest.class.getResourceAsStream("/validation_dialect.json"))), false);
+				new JSONArray(new JSONTokener(BasicTest.class.getResourceAsStream("/validation_dialect.json"))), true);
 
 	}
 
@@ -37,12 +37,12 @@ public class BasicTest extends TestCase {
 				.readFromJSON((JSONObject)_convertToJson(obj), Dialect.class);
 		JSONArray write = new AMFJSONLD().writeJSONLD(readDocument,
 				"file:/shared/src/test/resources/vocabularies/validation_dialect.raml");
-		//System.out.println(write.toString(2));
 		JSONAssert.assertEquals(write,
-				new JSONArray(new JSONTokener(BasicTest.class.getResourceAsStream("/validation2.json"))), false);
+				new JSONArray(new JSONTokener(BasicTest.class.getResourceAsStream("/validation2.json"))), true);
 
 	}
 
+	@SuppressWarnings("unchecked")
 	private static Object _convertToJson(Object o) throws JSONException {
 		if (o instanceof Map) {
 			Map<Object, Object> map = (Map<Object, Object>) o;
@@ -57,6 +57,7 @@ public class BasicTest extends TestCase {
 
 			return result;
 		} else if (o instanceof ArrayList) {
+			@SuppressWarnings("rawtypes")
 			ArrayList arrayList = (ArrayList) o;
 			JSONArray result = new JSONArray();
 

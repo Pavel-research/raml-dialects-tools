@@ -5,6 +5,7 @@ import org.raml.jsonld2toplevel.annotations.ClassTerm;
 import org.raml.jsonld2toplevel.annotations.DialectPropertyName;
 import org.raml.jsonld2toplevel.annotations.NeedsResolving;
 import org.raml.jsonld2toplevel.annotations.PropertyTerm;
+import org.raml.jsonld2toplevel.annotations.Reference;
 
 @ClassTerm("http://raml.org/vocabularies/meta#PropertyMapping")
 public class PropertyMapping {
@@ -33,7 +34,8 @@ public class PropertyMapping {
 	protected boolean asMap;
 
 	@PropertyTerm("http://raml.org/vocabularies/meta#range")
-	protected ArrayList<String> range;
+	@Reference
+	protected ArrayList<NodeMapping> range;
 
 	@PropertyTerm("http://raml.org/vocabularies/meta#enum")
 	@DialectPropertyName("enum")

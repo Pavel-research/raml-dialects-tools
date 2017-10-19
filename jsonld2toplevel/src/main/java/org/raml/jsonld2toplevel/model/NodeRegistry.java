@@ -1,4 +1,5 @@
 package org.raml.jsonld2toplevel.model;
+
 import java.lang.reflect.AnnotatedElement;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
@@ -12,6 +13,7 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 import org.raml.jsonld2toplevel.annotations.AlsoMappedTo;
+import org.raml.jsonld2toplevel.annotations.CanBeValue;
 import org.raml.jsonld2toplevel.annotations.ClassTerm;
 import org.raml.jsonld2toplevel.annotations.Hash;
 import org.raml.jsonld2toplevel.annotations.Mandatory;
@@ -68,7 +70,7 @@ public final class NodeRegistry {
 			if (models.containsKey(term)) {
 				return models.get(term);
 			} else {
-				NodeModel mdl = new NodeModel(clazz, term);
+				NodeModel mdl = new NodeModel(clazz, term, this);
 				mdl.alternatives = options;
 				models.put(term, mdl);
 				process(mdl, clazz);
@@ -112,6 +114,9 @@ public final class NodeRegistry {
 		for (PropertyModel m : mdl.mappings.values()) {
 			mdl.dialectPropertyMappings.put(m.dialectName, m);
 			register(m.nodeType);
+			if (m.canBeValue) {
+				mdl.valueProperty = m;
+			}
 		}
 	}
 
@@ -181,6 +186,9 @@ public final class NodeRegistry {
 		}
 		if (memb.getAnnotation(NeedsResolving.class) != null) {
 			ts.resolve = true;
+		}
+		if (memb.getAnnotation(CanBeValue.class) != null) {
+			ts.canBeValue = true;
 		}
 		if (returnType instanceof ParameterizedType) {
 			ParameterizedType pt = (ParameterizedType) returnType;

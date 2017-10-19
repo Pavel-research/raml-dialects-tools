@@ -4,11 +4,10 @@ import org.raml.vocabularies.dto.BaseTermDTO;
 
 public class BaseTerm<T extends BaseTermDTO> {
 
-	
 	private String name;
 	private Vocabulary vocabulary;
 	protected T dto;
-	
+
 	public void setName(String name) {
 		dto.setName(name);
 	}
@@ -29,13 +28,13 @@ public class BaseTerm<T extends BaseTermDTO> {
 		dto.setDescription(description);
 	}
 
-	public BaseTerm(String name,Vocabulary vocabulary,T dto) {
+	public BaseTerm(String name, Vocabulary vocabulary, T dto) {
 		super();
-		this.name=name;
-		this.vocabulary=vocabulary;
-		this.dto=dto;
+		this.name = name;
+		this.vocabulary = vocabulary;
+		this.dto = dto;
 	}
-	
+
 	public String getName() {
 		return name;
 	}
