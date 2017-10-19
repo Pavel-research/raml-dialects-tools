@@ -7,6 +7,7 @@ import org.raml.jsonld2toplevel.annotations.CanBeValue;
 import org.raml.jsonld2toplevel.annotations.ClassTerm;
 import org.raml.jsonld2toplevel.annotations.DialectPropertyName;
 import org.raml.jsonld2toplevel.annotations.Hash;
+import org.raml.jsonld2toplevel.annotations.NeedsResolving;
 import org.raml.jsonld2toplevel.annotations.PropertyTerm;
 import org.raml.jsonld2toplevel.annotations.Reference;
 
@@ -20,6 +21,7 @@ public class NodeMapping {
 
 	@PropertyTerm("http://raml.org/vocabularies/meta#classTerm")
 	@Reference
+	@NeedsResolving
 	protected String classTerm;
 
 	@Hash("http://raml.org/vocabularies/meta#name")

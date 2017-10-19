@@ -71,7 +71,7 @@
             "http://raml.org/vocabularies/meta#name": [{"@value": "message"}]
           }
         ],
-        "http://raml.org/vocabularies/meta#classTerm": [{"@id": "shacl.JSConstraint"}],
+        "http://raml.org/vocabularies/meta#classTerm": [{"@id": "http://www.w3.org/ns/shacl#JSConstraint"}],
         "@id": "file:/shared/src/test/resources/vocabularies/validation_dialect.raml#functionConstraintNode",
         "http://raml.org/vocabularies/meta#name": [{"@value": "functionConstraintNode"}]
       },
@@ -151,7 +151,7 @@
             "http://raml.org/vocabularies/meta#name": [{"@value": "maxCount"}]
           }
         ],
-        "http://raml.org/vocabularies/meta#classTerm": [{"@id": "shacl.PropertyShape"}],
+        "http://raml.org/vocabularies/meta#classTerm": [{"@id": "http://www.w3.org/ns/shacl#PropertyShape"}],
         "@id": "file:/shared/src/test/resources/vocabularies/validation_dialect.raml#propertyConstraintNode",
         "http://raml.org/vocabularies/meta#name": [{"@value": "propertyConstraintNode"}]
       },
@@ -189,7 +189,7 @@
             "http://raml.org/vocabularies/meta#name": [{"@value": "functionConstraint"}]
           }
         ],
-        "http://raml.org/vocabularies/meta#classTerm": [{"@id": "validation.FunctionValidation"}],
+        "http://raml.org/vocabularies/meta#classTerm": [{"@id": "http://raml.org/vocabularies/amf-validation#FunctionValidation"}],
         "@id": "file:/shared/src/test/resources/vocabularies/validation_dialect.raml#functionValidationNode",
         "http://raml.org/vocabularies/meta#name": [{"@value": "functionValidationNode"}]
       },
@@ -229,7 +229,7 @@
             "http://raml.org/vocabularies/meta#name": [{"@value": "message"}]
           }
         ],
-        "http://raml.org/vocabularies/meta#classTerm": [{"@id": "validation.ShapeValidation"}],
+        "http://raml.org/vocabularies/meta#classTerm": [{"@id": "http://raml.org/vocabularies/amf-validation#ShapeValidation"}],
         "@id": "file:/shared/src/test/resources/vocabularies/validation_dialect.raml#shapeValidationNode",
         "http://raml.org/vocabularies/meta#name": [{"@value": "shapeValidationNode"}]
       },
@@ -276,7 +276,7 @@
             "http://raml.org/vocabularies/meta#name": [{"@value": "targetQuery"}]
           }
         ],
-        "http://raml.org/vocabularies/meta#classTerm": [{"@id": "validation.QueryValidation"}],
+        "http://raml.org/vocabularies/meta#classTerm": [{"@id": "http://raml.org/vocabularies/amf-validation#QueryValidation"}],
         "@id": "file:/shared/src/test/resources/vocabularies/validation_dialect.raml#queryValidationNode",
         "http://raml.org/vocabularies/meta#name": [{"@value": "queryValidationNode"}]
       },
@@ -351,7 +351,7 @@
             "http://raml.org/vocabularies/meta#name": [{"@value": "info"}]
           }
         ],
-        "http://raml.org/vocabularies/meta#classTerm": [{"@id": "validation.Profile"}],
+        "http://raml.org/vocabularies/meta#classTerm": [{"@id": "http://raml.org/vocabularies/amf-validation#Profile"}],
         "@id": "file:/shared/src/test/resources/vocabularies/validation_dialect.raml#profileNode",
         "http://raml.org/vocabularies/meta#name": [{"@value": "profileNode"}]
       }

@@ -1,7 +1,5 @@
 package jsonld2toplevel;
 
-import java.net.URISyntaxException;
-
 import org.json.JSONArray;
 import org.json.JSONTokener;
 import org.junit.Test;
@@ -11,7 +9,6 @@ import org.raml.jsonld2toplevel.DialectRegistry;
 import org.skyscreamer.jsonassert.JSONAssert;
 import org.yaml.snakeyaml.Yaml;
 
-import junit.framework.Assert;
 import junit.framework.TestCase;
 
 public class BasicTest extends TestCase {
@@ -60,6 +57,6 @@ public class BasicTest extends TestCase {
 		Dialect readDocument;
 		readDocument = DialectRegistry.getDefault().parse(BasicTest.class.getResource("/validation3.yaml"), Dialect.class);
 		String classTerm = readDocument.getRaml().getDocument().getEncodes().getClassTerm();
-		System.out.println(classTerm);		
+		assertEquals(classTerm,"http://raml.org/vocabularies/amf-validation#Profile");
 	}
 }

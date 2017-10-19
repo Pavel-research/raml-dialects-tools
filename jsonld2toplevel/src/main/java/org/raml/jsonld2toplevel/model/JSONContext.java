@@ -4,6 +4,7 @@ import java.util.LinkedHashMap;
 
 import org.json.JSONObject;
 import org.raml.jsonld2toplevel.HasId;
+import org.raml.jsonld2toplevel.ICanResolveIds;
 
 public final class JSONContext extends JSONLDContext {
 
@@ -40,16 +41,20 @@ public final class JSONContext extends JSONLDContext {
 			if (externals.containsKey(namespace)) {
 				return externals.get(namespace) + string.substring(indexOf + 1);
 			}
-			if (uses.containsKey(namespace)){
+			if (uses.containsKey(namespace)) {
 				Object object = uses.get(namespace);
+				if (object instanceof ICanResolveIds){
+					ICanResolveIds r=(ICanResolveIds) object;
+					return r.resolveToURI(string.substring(indexOf+1));
+				}
 			}
 		}
 		return string;
 	}
-	
+
 	protected Object resolveBuiltin(Entry e, Object newValue, HasId object) {
-		if (object.shortName().equals(e.id)){
-			newValue=object;											
+		if (object.shortName().equals(e.id)) {
+			newValue = object;
 		}
 		return newValue;
 	}
