@@ -14,6 +14,11 @@
 			<version>4.12</version>
 			<scope>test</scope>
 		</dependency>
+		<dependency>
+			<groupId>com.onpositive.aml</groupId>
+			<artifactId>org.raml.amfjsonld</artifactId>
+			<version>${project.version}</version>
+		</dependency>
 	</dependencies>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

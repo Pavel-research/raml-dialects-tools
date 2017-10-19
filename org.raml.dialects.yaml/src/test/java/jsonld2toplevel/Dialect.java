@@ -3,10 +3,13 @@ package jsonld2toplevel;
 import java.util.Map;
 
 import org.raml.jsonld2toplevel.annotations.ClassTerm;
+import org.raml.jsonld2toplevel.annotations.DomainRootElement;
 import org.raml.jsonld2toplevel.annotations.Hash;
 import org.raml.jsonld2toplevel.annotations.PropertyTerm;
+import org.raml.vocabularies.Vocabulary;
 
 @ClassTerm("http://raml.org/vocabularies/meta#dialect")
+@DomainRootElement(dependencies=Vocabulary.class)
 public class Dialect {
 
 	@PropertyTerm("http://raml.org/vocabularies/meta#dialect")

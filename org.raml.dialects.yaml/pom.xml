@@ -32,6 +32,11 @@
 			<artifactId>org.raml.amfjsonld</artifactId>
 			<version>${project.version}</version>
 		</dependency>
+		<dependency>
+			<groupId>com.onpositive.aml</groupId>
+			<artifactId>org.raml.vocabularies</artifactId>
+			<version>${project.version}</version>
+		</dependency>
 	</dependencies>
 	<parent>
 		<groupId>com.onpositive.aml</groupId>

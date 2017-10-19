@@ -16,7 +16,7 @@ public class ClassTerm extends BaseTerm<ClassTermDTO> implements DataType{
 	}
 	
 	protected LinkedHashMap<String,PropertyTerm>pmap=new LinkedHashMap<>();
-	protected ArrayList<ClassTerm>superTypes=new ArrayList<>();
+	protected ArrayList<DataType>superTypes=new ArrayList<>();
 	protected ArrayList<ClassTerm>subTypes=new ArrayList<>();
 	
 	public PropertyTerm getDeclaredProperty(String name) {
@@ -28,7 +28,7 @@ public class ClassTerm extends BaseTerm<ClassTermDTO> implements DataType{
 	public Collection<PropertyTerm>getDeclaredProperties(){
 		return this.pmap.values();
 	}
-	public Collection<ClassTerm> getSuperTypes(){
+	public Collection<DataType> getSuperTypes(){
 		return this.superTypes;
 	}
 	public List<ClassTerm>getSubTypes(){
@@ -40,7 +40,7 @@ public class ClassTerm extends BaseTerm<ClassTermDTO> implements DataType{
 	}
 	
 	public boolean isSubTypeOf(DataType t) {		
-		for (ClassTerm ta:this.superTypes) {
+		for (DataType ta:this.superTypes) {
 			if (ta==t||ta.isSubTypeOf(t)) {
 				return true;
 			}
@@ -78,11 +78,10 @@ public class ClassTerm extends BaseTerm<ClassTermDTO> implements DataType{
 			List<String>l=(List<String>) obj;
 			l.forEach(c->{
 				DataType resolveClass = this.getVocabulary().resolveClass(c);
-				if (!(resolveClass instanceof ClassTerm)) {
-					throw new IllegalStateException("Can not resolve super type:"+c);
-				}
-				this.superTypes.add((ClassTerm) resolveClass);
+				this.superTypes.add(resolveClass);
+				if (resolveClass instanceof ClassTerm){
 				((ClassTerm)resolveClass).subTypes.add(this);
+				}
 			});
 		}
 	}

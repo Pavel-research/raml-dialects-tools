@@ -1,23 +1,29 @@
 package org.raml.vocabularies;
 
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.Reader;
+import java.net.MalformedURLException;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+import org.raml.jsonld2toplevel.annotations.DomainRootElement;
 import org.raml.vocabularies.dto.ClassTermDTO;
 import org.raml.vocabularies.dto.PropertyTermDTO;
 import org.raml.vocabularies.dto.VocabularyDTO;
 import org.yaml.snakeyaml.Yaml;
 
+@DomainRootElement(parser=VocabularyParser.class)
 public class Vocabulary extends Base {
 
 	private static Yaml yaml = new Yaml();
 
 	private String base;
 
-	private String dialect;
+	private String vocabulary;
 
 	private String version; 
 
@@ -27,7 +33,7 @@ public class Vocabulary extends Base {
 
 	private Map<String, String> external = new LinkedHashMap<String, String>();
 
-	private Map<String, PropertyTerm> propertyTerms = new LinkedHashMap<String, PropertyTerm>();
+	private Map<String, LocalPropertyTerm> propertyTerms = new LinkedHashMap<String, LocalPropertyTerm>();
 
 	private Map<String, ClassTerm> classTerms = new LinkedHashMap<String, ClassTerm>();
 
@@ -47,8 +53,15 @@ public class Vocabulary extends Base {
 	
 	public Vocabulary(URL load) throws IOException {
 		super();
+		InputStream openStream = load.openStream();
+		Reader rs=new InputStreamReader(openStream,"UTF-8");
+		load(load, rs);
+	}
+
+	public void load(URL load, Reader rs) throws IOException, MalformedURLException {
 		this.location = load;
-		VocabularyDTO pojoList = yaml.loadAs(load.openStream(), VocabularyDTO.class);
+		VocabularyDTO pojoList = yaml.loadAs(rs, VocabularyDTO.class);
+		this.external=pojoList.getExternal();
 		Map<String, String> uses = pojoList.getUses();
 		for (String nm : uses.keySet()) {
 			try {
@@ -64,7 +77,7 @@ public class Vocabulary extends Base {
 		}
 		Map<String, PropertyTermDTO> props = pojoList.getPropertyTerms();
 		for (String nm : props.keySet()) {
-			this.propertyTerms.put(nm, new PropertyTerm(nm,this,props.get(nm)));
+			this.propertyTerms.put(nm, new LocalPropertyTerm(nm,this,props.get(nm)));
 		}
 		this.classTerms.values().forEach(v->v.resolve());
 		this.propertyTerms.values().forEach(v->v.resolve());
@@ -78,12 +91,12 @@ public class Vocabulary extends Base {
 		this.base = base;
 	}
 
-	public String getDialect() {
-		return dialect;
+	public String getVocabulary() {
+		return vocabulary;
 	}
 
-	public void setDialect(String dialect) {
-		this.dialect = dialect;
+	public void setVocabulary(String dialect) {
+		this.vocabulary = dialect;
 	}
 
 	public String getVersion() {
@@ -118,11 +131,11 @@ public class Vocabulary extends Base {
 		this.external = external;
 	}
 
-	public Map<String, PropertyTerm> getPropertyTerms() {
+	public Map<String, LocalPropertyTerm> getPropertyTerms() {
 		return propertyTerms;
 	}
 
-	public void setPropertyTerms(Map<String, PropertyTerm> propertyTerms) {
+	public void setPropertyTerms(Map<String, LocalPropertyTerm> propertyTerms) {
 		this.propertyTerms = propertyTerms;
 	}
 
@@ -135,7 +148,7 @@ public class Vocabulary extends Base {
 	}
 
 	public PropertyTerm resolveProperty(String range) {
-		PropertyTerm ct=this.propertyTerms.get(range);
+		LocalPropertyTerm ct=this.propertyTerms.get(range);
 		if (ct!=null) {
 			return ct;
 		}
@@ -146,6 +159,10 @@ public class Vocabulary extends Base {
 			Vocabulary vocabulary = this.uses.get(nms);
 			if (vocabulary!=null) {
 				return vocabulary.resolveProperty(localName);
+			}
+			String string = this.external.get(nms);
+			if (string!=null){
+				return new ExternalPropertyTerm(range, string+localName);
 			}
 		}
 		return null;		
@@ -166,12 +183,17 @@ public class Vocabulary extends Base {
 			if (vocabulary!=null) {
 				return vocabulary.resolveClass(localName);
 			}
+			String string = this.external.get(nms);
+			if (string!=null){
+				return new ExternalClass(range, string+localName);
+			}
 		}
 		for (Builtins b:Builtins.values()) {
 			if (b.getName().equals(range)) {
 				return b;
 			}
 		}
+		
 		return null;		
 	}
 }

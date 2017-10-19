@@ -4,7 +4,7 @@ import java.util.Collection;
 import java.util.Collections;
 
 public enum Builtins implements DataType{
-	BOOLEAN,INTEGER,NUMBER,URI,DATETIME,STRING,OBJECT;
+	BOOLEAN,INTEGER,NUMBER,URI,DATETIME,STRING,OBJECT,ANY;
 
 	@Override
 	public String getName() {

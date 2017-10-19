@@ -28,7 +28,7 @@ public final class JSONContext extends JSONLDContext {
 		if (object.has(USES)) {
 			JSONObject external = object.getJSONObject(USES);
 			for (String s : external.keySet()) {
-				externals.put(s, external.getString(s));
+				uses.put(s, external.get(s));
 			}
 		}
 	}
@@ -39,6 +39,9 @@ public final class JSONContext extends JSONLDContext {
 			String namespace = string.substring(0, indexOf);
 			if (externals.containsKey(namespace)) {
 				return externals.get(namespace) + string.substring(indexOf + 1);
+			}
+			if (uses.containsKey(namespace)){
+				Object object = uses.get(namespace);
 			}
 		}
 		return string;

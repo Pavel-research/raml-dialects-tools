@@ -7,7 +7,7 @@ public class VocabularyDTO {
 
 	private String base;
 	
-	private String dialect;
+	private String vocabulary;
 	
 	private String version;
 	
@@ -35,11 +35,11 @@ public class VocabularyDTO {
 	public void setBase(String base) {
 		this.base = base;
 	}
-	public String getDialect() {
-		return dialect;
+	public String getVocabulary() {
+		return vocabulary;
 	}
-	public void setDialect(String dialect) {
-		this.dialect = dialect;
+	public void setVocabulary(String dialect) {
+		this.vocabulary = dialect;
 	}
 	public String getVersion() {
 		return version;
