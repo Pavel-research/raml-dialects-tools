@@ -3,10 +3,13 @@ package org.raml.dialects.toplevel.model;
 import java.util.Map;
 
 import org.raml.dialects.core.annotations.ClassTerm;
+import org.raml.dialects.core.annotations.DomainRootElement;
 import org.raml.dialects.core.annotations.Hash;
 import org.raml.dialects.core.annotations.PropertyTerm;
+import org.raml.vocabularies.Vocabulary;
 
 @ClassTerm("http://raml.org/vocabularies/meta#dialect")
+@DomainRootElement(dependencies=Vocabulary.class)
 public class Dialect {
 
 	@PropertyTerm("http://raml.org/vocabularies/meta#dialect")

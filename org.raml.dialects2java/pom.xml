@@ -1,18 +1,13 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<artifactId>org.raml.dialects.toplevel</artifactId>
+	<artifactId>org.raml.dialects2java</artifactId>
 	<dependencies>
 		<!-- https://mvnrepository.com/artifact/org.json/json -->
 		<dependency>
 			<groupId>org.json</groupId>
 			<artifactId>json</artifactId>
 			<version>20170516</version>
-		</dependency>
-		<dependency>
-			<groupId>org.yaml</groupId>
-			<artifactId>snakeyaml</artifactId>
-			<version>1.18</version>
 		</dependency>
 		<!-- https://mvnrepository.com/artifact/org.skyscreamer/jsonassert -->
 		<dependency>
@@ -22,21 +17,36 @@
 			<scope>test</scope>
 		</dependency>
 		<dependency>
-			<groupId>com.onpositive.aml</groupId>
-			<artifactId>org.raml.vocabularies</artifactId>
-			<version>${project.version}</version>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
 			<groupId>org.junit</groupId>
 			<artifactId>junit4-engine</artifactId>
 			<version>5.0.0-ALPHA</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
+			<groupId>com.sun.codemodel</groupId>
+			<artifactId>codemodel</artifactId>
+			<version>2.6</version>
+		</dependency>
+		<dependency> 
 			<groupId>com.onpositive.aml</groupId>
 			<artifactId>org.raml.dialects.core</artifactId>
 			<version>${project.version}</version>
+		</dependency>
+		<dependency> 
+			<groupId>com.onpositive.aml</groupId>
+			<artifactId>org.raml.dialects.toplevel</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<dependency> 
+			<groupId>com.onpositive.aml</groupId>
+			<artifactId>org.raml.dialects.yaml</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.onpositive.aml</groupId>
+			<artifactId>org.raml.vocabularies</artifactId>
+			<version>${project.version}</version>
+			<scope>test</scope>
 		</dependency>
 	</dependencies>
 	<parent>
