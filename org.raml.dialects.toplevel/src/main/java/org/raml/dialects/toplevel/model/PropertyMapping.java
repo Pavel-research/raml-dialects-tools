@@ -40,4 +40,76 @@ public class PropertyMapping {
 	@PropertyTerm("http://raml.org/vocabularies/meta#enum")
 	@DialectPropertyName("enum")
 	protected ArrayList<String> enumValues;
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getPropertyTerm() {
+		return propertyTerm;
+	}
+
+	public void setPropertyTerm(String propertyTerm) {
+		this.propertyTerm = propertyTerm;
+	}
+
+	public String getHash() {
+		return hash;
+	}
+
+	public void setHash(String hash) {
+		this.hash = hash;
+	}
+
+	public String getPattern() {
+		return pattern;
+	}
+
+	public void setPattern(String pattern) {
+		this.pattern = pattern;
+	}
+
+	public boolean isMandatory() {
+		return mandatory;
+	}
+
+	public void setMandatory(boolean mandatory) {
+		this.mandatory = mandatory;
+	}
+
+	public boolean isAllowMultiple() {
+		return allowMultiple;
+	}
+
+	public void setAllowMultiple(boolean allowMultiple) {
+		this.allowMultiple = allowMultiple;
+	}
+
+	public boolean isAsMap() {
+		return asMap;
+	}
+
+	public void setAsMap(boolean asMap) {
+		this.asMap = asMap;
+	}
+
+	public ArrayList<NodeMapping> getRange() {
+		return range;
+	}
+
+	public void setRange(ArrayList<NodeMapping> range) {
+		this.range = range;
+	}
+
+	public ArrayList<String> getEnumValues() {
+		return enumValues;
+	}
+
+	public void setEnumValues(ArrayList<String> enumValues) {
+		this.enumValues = enumValues;
+	}
 }

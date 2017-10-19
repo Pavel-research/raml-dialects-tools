@@ -24,4 +24,28 @@ public class NodeMapping {
 	@PropertyTerm("http://raml.org/vocabularies/meta#mapping")
 	@DialectPropertyName("mapping")
 	protected Map<String, PropertyMapping> mappings;
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getClassTerm() {
+		return classTerm;
+	}
+
+	public void setClassTerm(String classTerm) {
+		this.classTerm = classTerm;
+	}
+
+	public Map<String, PropertyMapping> getMappings() {
+		return mappings;
+	}
+
+	public void setMappings(Map<String, PropertyMapping> mappings) {
+		this.mappings = mappings;
+	}
 }

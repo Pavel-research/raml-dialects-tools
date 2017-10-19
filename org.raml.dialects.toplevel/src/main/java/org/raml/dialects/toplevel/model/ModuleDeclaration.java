@@ -12,4 +12,12 @@ public class ModuleDeclaration {
 	@PropertyTerm("http://raml.org/vocabularies/meta#declares")
 	@Hash("http://raml.org/vocabularies/meta#name")
 	Map<String, Declaration> declares;
+
+	public Map<String, Declaration> getDeclares() {
+		return declares;
+	}
+
+	public void setDeclares(Map<String, Declaration> declares) {
+		this.declares = declares;
+	}
 }

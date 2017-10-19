@@ -30,11 +30,11 @@ public class BasicTest extends TestCase {
 
 	@Test
 	public void test2() {
-		Yaml yaml= new Yaml();
-	    Object obj = yaml.load(BasicTest.class.getResourceAsStream("/validation.yaml"));
+		Yaml yaml = new Yaml();
+		Object obj = yaml.load(BasicTest.class.getResourceAsStream("/validation.yaml"));
 		Dialect readDocument = new AMFJSONLD()
-				
-				.readFromJSON((JSONObject)_convertToJson(obj), Dialect.class);
+
+				.readFromJSON((JSONObject) _convertToJson(obj), Dialect.class);
 		JSONArray write = new AMFJSONLD().writeJSONLD(readDocument,
 				"file:/shared/src/test/resources/vocabularies/validation_dialect.raml");
 		JSONAssert.assertEquals(write,

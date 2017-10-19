@@ -15,4 +15,20 @@ public class Declaration {
 	
 	@PropertyTerm("http://raml.org/vocabularies/meta#name")
 	protected String name;
+
+	public NodeMapping getDeclaredNode() {
+		return declaredNode;
+	}
+
+	public void setDeclaredNode(NodeMapping declaredNode) {
+		this.declaredNode = declaredNode;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
 }

@@ -10,4 +10,12 @@ public class DocumentDeclaration {
 	@PropertyTerm("http://raml.org/vocabularies/meta#encodes")
 	@Reference
 	protected NodeMapping encodes;
+
+	public NodeMapping getEncodes() {
+		return encodes;
+	}
+
+	public void setEncodes(NodeMapping encodes) {
+		this.encodes = encodes;
+	}
 }
