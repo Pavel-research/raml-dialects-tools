@@ -147,7 +147,6 @@
 		</plugins>
 	</build>
 	<modules>
-		<module>jsonld2toplevel</module>
 		<module>vocabularies</module>
 		<module>org.raml.dialects.toplevel</module>
 		<module>org.raml.dialects.yaml</module>

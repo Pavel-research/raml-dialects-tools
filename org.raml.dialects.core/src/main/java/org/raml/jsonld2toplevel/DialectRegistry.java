@@ -119,13 +119,13 @@ public class DialectRegistry {
 			if (adapter!=null){
 				JSONOutput adaptToJson = adapter.adaptToJson(new StringReader(readStream), location, parserRecord.clazz);
 				if(iParser instanceof IJSONParser){
-					return clazz.cast(((IJSONParser<?>)iParser).parse(adaptToJson, location, (Class) parserRecord.clazz));
+					return (T)clazz.cast(((IJSONParser<?>)iParser).parse(adaptToJson, location, (Class) parserRecord.clazz));
 				}
 				else{
 					readStream=adaptToJson.toString();
 				}
 			}
-			return clazz.cast(iParser.parse(new StringReader(readStream), location, (Class) parserRecord.clazz));
+			return (T)clazz.cast(iParser.parse(new StringReader(readStream), location, (Class) parserRecord.clazz));
 		} catch (Exception e) {
 			throw new IllegalStateException(e);
 		}

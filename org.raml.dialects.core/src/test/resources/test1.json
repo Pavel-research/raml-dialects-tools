@@ -1,69 +1,52 @@
 {
-	"ValidationRules": {
-		"case-insensitive-schema": {
-			"classId": "http.WebAPI",
-			"name": "case-insensitive-schema",
-			"property": [
-				{
-					"pattern": "^(h|H)(t|T){2}(p|P)(s|S)?$",
-					"ramlProp": "http.host"
-				}
-			],
-			"message": "This is not a valid scheme"
-		},
-		"get-operations-with-response-js": {
-			"classId": "http.Operation",
-			"name": "get-operations-with-response-js",
-			"message": "GET operations must have a response",
-			"functionConstraint": {
-				"jsCode": "function(operations) {}"
-			}
-		},
-		"all-names-must-be-camel-case": {
-			"classId": "raml-doc.DomainEntity",
-			"name": "all-names-must-be-camel-case",
-			"property": [
-				{
-					"pattern": "([a-z]+[A-Z]+\\w+)+",
-					"ramlProp": "schema-org.name"
-				}
-			],
-			"message": "All declarations"
-		},
-		"get-operations-with-responses-sparql": {
-			"name": "get-operations-with-responses-sparql",
-			"targetQuery": "?request a hydra:Operation ;",
-			"message": "GET operations must have a response"
-		},
-		"camel-case-types": {
-			"classId": "raml-shapes.Shape",
-			"name": "camel-case-types",
-			"property": [
-				{
-					"pattern": "([a-z]+[A-Z]+\\w+)+",
-					"ramlProp": "schema-org.name"
-				}
-			],
-			"message": "Type declarations must be camel cased"
-		}
-	},
-	"profile": "RAML",
-	"violations": [
-		"amf-parser.empty-endpoints",
-		"get-operations-with-response-js",
-		"camel-case-types"
-	],
-	"warnings": [
-		"amf-parser.strict-url-strings",
-		"all-names-must-be-camel-case"
-	],
-	"name": "Barclays UK",
-	"description": "Custom profile that can be used as the base set of validations for all Barclays UK API specs",
-	"disabled": [
-		"amf-parser.raml-schemes"
-	],
-	"version": "0.1-SNAPSHOT",
-	"info": [
-		"amf-parser.empty-responses"
-	]
+  "ValidationRules": {
+    "case-insensitive-schema": {
+      "classId": "http.WebAPI",
+      "property": {
+        "pattern": "^(h|H)(t|T){2}(p|P)(s|S)?$",
+        "ramlProp": "http.host"
+      },
+      "message": "This is not a valid scheme"
+    },
+    "get-operations-with-response-js": {
+      "classId": "http.Operation",
+      "message": "GET operations must have a response",
+      "functionConstraint": {"jsCode": "function(operations) {}"}
+    },
+    "all-names-must-be-camel-case": {
+      "classId": "raml-doc.DomainEntity",
+      "property": {
+        "pattern": "([a-z]+[A-Z]+\\w+)+",
+        "ramlProp": "schema-org.name"
+      },
+      "message": "All declarations"
+    },
+    "get-operations-with-responses-sparql": {
+      "targetQuery": "?request a hydra:Operation ;",
+      "message": "GET operations must have a response"
+    },
+    "camel-case-types": {
+      "classId": "raml-shapes.Shape",
+      "property": {
+        "pattern": "([a-z]+[A-Z]+\\w+)+",
+        "ramlProp": "schema-org.name"
+      },
+      "message": "Type declarations must be camel cased"
+    }
+  },
+  "profile": "RAML",
+  "violations": [
+    "amf-parser.empty-endpoints",
+    "get-operations-with-response-js",
+    "camel-case-types"
+  ],
+  "warnings": [
+    "amf-parser.strict-url-strings",
+    "all-names-must-be-camel-case"
+  ],
+  "name": "Barclays UK",
+  "description": "Custom profile that can be used as the base set of validations for all Barclays UK API specs",
+  "disabled": "amf-parser.raml-schemes",
+  "version": "0.1-SNAPSHOT",
+  "info": "amf-parser.empty-responses"
 }

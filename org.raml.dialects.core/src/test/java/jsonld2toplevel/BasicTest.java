@@ -36,7 +36,8 @@ public class BasicTest extends TestCase {
 	public void test2() {
 		ValidationProfile2 readDocument = new AMFJSONLD()
 				.readDocument(BasicTest.class.getResourceAsStream("/test.json"), ValidationProfile2.class);
-		JSONAssert.assertEquals(new AMFJSONLD().writeJSON(readDocument),
+		JSONObject writeJSON = new AMFJSONLD().writeJSON(readDocument);
+		JSONAssert.assertEquals(writeJSON,
 				new JSONObject(new JSONTokener(BasicTest.class.getResourceAsStream("/test1.json"))), false);
 	}
 
