@@ -24,8 +24,7 @@
 		<dependency>
 			<groupId>com.onpositive.aml</groupId>
 			<artifactId>org.raml.vocabularies</artifactId>
-			<version>${project.version}</version>
-			<scope>test</scope>
+			<version>${project.version}</version>			
 		</dependency>
 		<dependency>
 			<groupId>org.junit</groupId>
