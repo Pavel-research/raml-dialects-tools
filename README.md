@@ -1,4 +1,4 @@
-# raml-dialects-tools
+# Raml Dialects Tools
 
 
 ![Build Status](https://api.travis-ci.org/petrochenko-pavel-a/raml-dialects-tools.svg)
@@ -8,7 +8,7 @@ This project contains Java implementation of
   * RAML Vocabularies 
   * RAML Dialects
 
-Project goal is to provide lightweight pure Java implementation for Dialects and Vocabularies specifications, as well as to provide facilities to parsing and serialization of user
+Project goal is to provide lightweight pure Java implementation for Dialects and Vocabularies specifications, as well as to provide facilities for parsing and serialization of user
 defined dialects.  
 
 ## Project modules
@@ -25,4 +25,4 @@ defined dialects.
 
 Examples: 
  * [Using maven plugin](./examples/dialect2java)
- * [Vocabularies] (./org.raml.vocabularies/README.md)  
+ * [Vocabularies](https://github.com/petrochenko-pavel-a/raml-dialects-tools/tree/master/org.raml.vocabularies)  
