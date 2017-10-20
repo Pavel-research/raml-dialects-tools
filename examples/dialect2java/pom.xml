@@ -126,6 +126,11 @@
 			<artifactId>org.raml.dialects.core</artifactId>
 			<version>${project.version}</version>
 		</dependency>
+		<dependency> 
+			<groupId>com.onpositive.aml</groupId>
+			<artifactId>org.raml.dialects.yaml</artifactId>
+			<version>${project.version}</version>
+		</dependency>
 		<dependency>
 			<groupId>org.skyscreamer</groupId>
 			<artifactId>jsonassert</artifactId>

@@ -70,6 +70,11 @@ public class DialectRegistry {
 				return false;
 			return true;
 		}
+
+		@Override
+		public String toString() {
+			return "ParserKey [header=" + header + "]";
+		}
 	}
 
 	protected LinkedHashMap<ParserKey, ParserRecord<?>> map = new LinkedHashMap<ParserKey, ParserRecord<?>>();
@@ -97,53 +102,60 @@ public class DialectRegistry {
 		}
 	}
 
-	@SuppressWarnings({ "unchecked", "rawtypes" })
+	@SuppressWarnings({ })
 	public <T> T parse(URI location, Class<T> clazz) {
 		try {
-			registerClass(clazz);
-			String sm = location.toString();
-			int ls = sm.lastIndexOf('.');
-			String extension = "json";
-			if (ls != -1) {
-				extension = sm.substring(ls + 1);
-			}
 			String readStream = readStream(location.toURL().openStream());
-
-			String firstLine = getFirstLine(readStream);
-			ParserRecord<?> parserRecord = map.get(new ParserKey(extension, firstLine));
-			IDataAdapter adapter = null;
-			if (parserRecord == null) {
-				try {
-					adapter = (IDataAdapter) Class.forName("org.raml.dialects." + extension.toUpperCase())
-							.newInstance();
-					parserRecord = map.get(new ParserKey("json", firstLine));
-				} catch (ClassNotFoundException e) {
-					// does not know format
-				}
-			}
-			if (parserRecord == null) {
-				if (extension.equals("json")
-						&& (clazz.getAnnotation(ClassTerm.class) != null || readStream.trim().startsWith("["))) {
-
-					return clazz.cast(defaultParser.parse(new StringReader(readStream), location, clazz));
-				}
-				throw new IllegalStateException("Does not know how to obtain parser for header:" + firstLine);
-			}
-			IParser<?> iParser = parserRecord.parser;
-			if (adapter != null) {
-				JSONOutput adaptToJson = adapter.adaptToJson(new StringReader(readStream), location,
-						parserRecord.clazz);
-				if (iParser instanceof IJSONParser) {
-					return (T) clazz
-							.cast(((IJSONParser<?>) iParser).parse(adaptToJson, location, (Class) parserRecord.clazz));
-				} else {
-					readStream = adaptToJson.toString();
-				}
-			}
-			return (T) clazz.cast(iParser.parse(new StringReader(readStream), location, (Class) parserRecord.clazz));
+			return parse(location, clazz, readStream);
 		} catch (Exception e) {
 			throw new IllegalStateException(e);
 		}
+	}
+
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	public <T> T parse(URI location, Class<T> clazz, String content)
+			throws Exception {
+		registerClass(clazz);
+		String sm = location.toString();
+		int ls = sm.lastIndexOf('.');
+		String extension = "json";
+		if (ls != -1) {
+			extension = sm.substring(ls + 1);
+		}
+		
+
+		String firstLine = getFirstLine(content);
+		ParserRecord<?> parserRecord = map.get(new ParserKey(extension, firstLine));
+		IDataAdapter adapter = null;
+		if (parserRecord == null) {
+			try {
+				adapter = (IDataAdapter) Class.forName("org.raml.dialects." + extension.toUpperCase())
+						.newInstance();
+				parserRecord = map.get(new ParserKey("json", firstLine));
+			} catch (ClassNotFoundException e) {
+				// does not know format
+			}
+		}
+		if (parserRecord == null) {
+			if (extension.equals("json")
+					&& (clazz.getAnnotation(ClassTerm.class) != null || content.trim().startsWith("["))) {
+
+				return clazz.cast(defaultParser.parse(new StringReader(content), location, clazz));
+			}
+			throw new IllegalStateException("Does not know how to obtain parser for header:" + firstLine);
+		}
+		IParser<?> iParser = parserRecord.parser;
+		if (adapter != null) {
+			JSONOutput adaptToJson = adapter.adaptToJson(new StringReader(content), location,
+					parserRecord.clazz);
+			if (iParser instanceof IJSONParser) {
+				return (T) clazz
+						.cast(((IJSONParser<?>) iParser).parse(adaptToJson, location, (Class) parserRecord.clazz));
+			} else {
+				content = adaptToJson.toString();
+			}
+		}
+		return (T) clazz.cast(iParser.parse(new StringReader(content), location, (Class) parserRecord.clazz));
 	}
 
 	public <T> void registerClass(Class<T> clazz) {
@@ -153,9 +165,7 @@ public class DialectRegistry {
 				DomainRootElement annotation = clazz.getAnnotation(DomainRootElement.class);
 				if (annotation != null) {
 					Class<? extends IParser<?>> parser = annotation.parser();
-					String name = annotation.name().length() > 0 ? annotation.name() : clazz.getSimpleName();
-					String version = annotation.version();
-					String header = "#%RAML " + version + " " + name;
+					String header =header(annotation,clazz);
 					IParser<?> newInstance = parser.newInstance();
 					for (String s : newInstance.supportedExtensions()) {
 						map.put(new ParserKey(s, header), new ParserRecord<T>(newInstance, clazz));
@@ -207,11 +217,32 @@ public class DialectRegistry {
 		return registry;
 	}
 
-	public JSONArray toJSONLD(Object toSerialize,String iri) {
+	public JSONArray toJSONLD(Object toSerialize, String iri) {
 		return DefaultParser.AMFJSONLD.writeJSONLD(toSerialize, iri);
 	}
 
 	public JSONObject toJSON(Object toSerialize) {
 		return DefaultParser.AMFJSONLD.writeJSON(toSerialize);
+	}
+
+	public String storeAs(Object toSerialize, Class<? extends IDataAdapter> adapter) {
+		try {
+			return adapter.newInstance().toStringRepresentation(toJSON(toSerialize), toSerialize.getClass());
+		} catch (InstantiationException e) {
+			throw new IllegalStateException(e);
+		} catch (IllegalAccessException e) {
+			throw new IllegalStateException(e);
+		}
+	}
+
+	public static String header(DomainRootElement annotation,Class<?>cl) {
+		String name = annotation.name();
+		if (name.indexOf(' ')==-1){
+			if (name.length()==0){
+				name=cl.getSimpleName();
+			}
+			return "#%RAML " + annotation.version() + " " + name;	
+		}
+		return "#%" + name + " " + annotation.version();
 	}
 }

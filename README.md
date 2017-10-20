@@ -26,3 +26,9 @@ defined dialects.
 Examples: 
  * [Using maven plugin](./examples/dialect2java)
  * [Vocabularies](https://github.com/petrochenko-pavel-a/raml-dialects-tools/tree/master/org.raml.vocabularies)  
+
+
+## Usage:
+ Good examples of using API may be found [here](./examples/dialect2java/src/test/java/org/aml/example/simple/dialects2java/BasicTest.java) 
+ 
+  

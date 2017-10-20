@@ -29,7 +29,7 @@ public class YAMLAdapter {
 
 	private static final AMFJSONLD AMFJSONLD = new AMFJSONLD();
 
-	private static Yaml yaml;
+	public static final Yaml yaml;
 	static {
 		DumperOptions dumperOptions = new DumperOptions();
 		dumperOptions.setDefaultFlowStyle(FlowStyle.BLOCK);
