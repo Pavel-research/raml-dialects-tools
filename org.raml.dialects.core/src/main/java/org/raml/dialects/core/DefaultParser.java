@@ -45,4 +45,8 @@ public class DefaultParser implements IParser<Object>,IJSONParser<Object>{
 		return new String[]{"json","jsonld"};
 	}
 
+	public void register(Class<?> clazz) {
+		AMFJSONLD.register(clazz);
+	}
+
 }

@@ -76,8 +76,11 @@ public class DialectRegistry {
 	public void registerParser(String header, String extension, IParser<?> parser, Class<?> target) {
 		map.put(new ParserKey(extension, header), new ParserRecord<Object>(parser, target));
 	}
-
+	DefaultParser defaultParser = new DefaultParser();
 	public Object parse(URI location) {
+		return parse(location, Object.class);
+	}
+	public Object parse(URL location) {
 		return parse(location, Object.class);
 	}
 
@@ -114,8 +117,9 @@ public class DialectRegistry {
 				}
 			}
 			if (parserRecord == null) {
-				if (extension.equals("json")&&clazz.getAnnotation(ClassTerm.class)!=null){					
-					return clazz.cast(new DefaultParser().parse(new StringReader(readStream), location, clazz));
+				if (extension.equals("json")&&(clazz.getAnnotation(ClassTerm.class)!=null||readStream.trim().startsWith("["))){					
+					
+					return clazz.cast(defaultParser.parse(new StringReader(readStream), location, clazz));
 				}
 				throw new IllegalStateException("Does not know how to obtain parser for header:" + firstLine);
 			}
@@ -152,6 +156,10 @@ public class DialectRegistry {
 					for (Class<?> c : annotation.dependencies()) {
 						registerClass(c);
 					}
+				}
+				ClassTerm annotation2 = clazz.getAnnotation(ClassTerm.class);
+				if (annotation2!=null){
+					defaultParser.register(clazz);
 				}
 			}
 		} catch (Exception e) {

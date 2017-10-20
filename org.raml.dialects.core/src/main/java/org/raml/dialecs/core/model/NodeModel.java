@@ -173,4 +173,8 @@ public final class NodeModel {
 		}
 		return isOk;
 	}
+
+	public Class<?> getTargetClass() {
+		return targetClass;
+	}
 }

@@ -44,10 +44,17 @@ public final class AMFJSONLD {
 		return read(array, target);
 	}
 
+	@SuppressWarnings("unchecked")
 	private <T> T read(JSONArray array, Class<T> t) {
 		JSONObject docobject = array.getJSONObject(0);
 		JSONObject jsonObject = docobject.getJSONArray(ENCODES).getJSONObject(0);
 		try {
+			if (jsonObject.has(TYPE)){
+				NodeModel model = nodeRegistry.getModel(jsonObject.getJSONArray(TYPE).getString(0));
+				if (t.isAssignableFrom(model.getTargetClass())){
+					t=(Class<T>) model.getTargetClass();
+				}
+			}
 			T newInstance = t.newInstance();
 			JSONLDContext ctx = new JSONLDContext();
 			fill(jsonObject, newInstance, ctx);
@@ -96,5 +103,9 @@ public final class AMFJSONLD {
 	private void fill(JSONObject jsonObject, Object newInstance, JSONLDContext ctx) {
 		NodeModel register = nodeRegistry.register(newInstance.getClass());
 		register.fill(jsonObject, newInstance, ctx);
+	}
+
+	public void register(Class<?> clazz) {
+		nodeRegistry.register(clazz);
 	}
 }
