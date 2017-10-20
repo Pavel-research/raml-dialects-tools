@@ -29,7 +29,6 @@ public final class NodeRegistry {
 	protected static HashSet<Class<?>> buildins = new HashSet<Class<?>>();
 
 	public NodeRegistry() {
-		System.out.println("A");
 	}
 	
 	static {

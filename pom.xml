@@ -151,5 +151,6 @@
 		<module>org.raml.dialects.toplevel</module>
 		<module>org.raml.dialects.yaml</module>
 		<module>org.raml.dialects.core</module>
+		<module>org.raml.dialects2java</module>
 	</modules>
 </project>

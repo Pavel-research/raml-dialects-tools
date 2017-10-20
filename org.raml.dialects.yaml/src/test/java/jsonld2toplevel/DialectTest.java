@@ -9,7 +9,7 @@ import org.raml.dialects.core.annotations.PropertyTerm;
 import org.raml.vocabularies.Vocabulary;
 
 @ClassTerm("http://raml.org/vocabularies/meta#dialect")
-@DomainRootElement(dependencies=Vocabulary.class)
+@DomainRootElement(dependencies=Vocabulary.class,name="Dialect")
 public class DialectTest {
 
 	@PropertyTerm("http://raml.org/vocabularies/meta#dialect")
