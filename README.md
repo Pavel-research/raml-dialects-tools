@@ -1,4 +1,4 @@
-# raml-dialects-tools
+# Raml Dialects Tools
 
 
 ![Build Status](https://api.travis-ci.org/petrochenko-pavel-a/raml-dialects-tools.svg)
