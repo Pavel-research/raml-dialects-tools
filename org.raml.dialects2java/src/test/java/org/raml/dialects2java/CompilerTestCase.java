@@ -132,6 +132,7 @@ public abstract class CompilerTestCase extends TestCase {
 		String path=BasicTest.class.getProtectionDomain().getCodeSource().getLocation().getFile();
 		File fl=folder.getRoot();
 		//recDelete(fl);
+		//fl=new File("C:\\Users\\Павел\\git\\raml-dialects-tools\\org.raml.dialects2java\\src\\test\\java");
 		fl.mkdirs();
 		
 		

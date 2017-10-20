@@ -12,6 +12,7 @@ import java.net.URL;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
 
+import org.raml.dialects.core.annotations.ClassTerm;
 import org.raml.dialects.core.annotations.DomainRootElement;
 
 public class DialectRegistry {
@@ -113,6 +114,9 @@ public class DialectRegistry {
 				}
 			}
 			if (parserRecord == null) {
+				if (extension.equals("json")&&clazz.getAnnotation(ClassTerm.class)!=null){					
+					return clazz.cast(new DefaultParser().parse(new StringReader(readStream), location, clazz));
+				}
 				throw new IllegalStateException("Does not know how to obtain parser for header:" + firstLine);
 			}
 			IParser<?> iParser = parserRecord.parser;

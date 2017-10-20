@@ -9,6 +9,8 @@ import org.json.JSONTokener;
 
 public class DefaultParser implements IParser<Object>,IJSONParser<Object>{
 
+	private static final AMFJSONLD AMFJSONLD = new AMFJSONLD();
+
 	@Override
 	public Class<Object> result() {
 		return Object.class;
@@ -19,10 +21,10 @@ public class DefaultParser implements IParser<Object>,IJSONParser<Object>{
 		JSONTokener jsonTokener = new JSONTokener(reader);
 		Object nextValue = jsonTokener.nextValue();
 		if (nextValue instanceof JSONObject){
-			return new AMFJSONLD().readFromJSON((JSONObject)nextValue, target);
+			return AMFJSONLD.readFromJSON((JSONObject)nextValue, target);
 		}
 		else if (nextValue instanceof JSONArray){
-			return new AMFJSONLD().readDocument((JSONArray)nextValue, target);
+			return AMFJSONLD.readDocument((JSONArray)nextValue, target);
 		}
 		throw new IllegalStateException("json array or json object is expected");
 	}
@@ -30,10 +32,10 @@ public class DefaultParser implements IParser<Object>,IJSONParser<Object>{
 	@Override
 	public Object parse(JSONOutput reader, URI location, Class<? extends Object> target) {
 		if (reader.array!=null){
-			return new AMFJSONLD().readDocument(reader.array, target);				
+			return AMFJSONLD.readDocument(reader.array, target);				
 		}
 		if (reader.object!=null){
-			return new AMFJSONLD().readFromJSON(reader.object, target);	
+			return AMFJSONLD.readFromJSON(reader.object, target);	
 		}
 		throw new IllegalStateException("json array or json object is expected");
 	}

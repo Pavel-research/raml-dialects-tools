@@ -28,6 +28,10 @@ public final class NodeRegistry {
 
 	protected static HashSet<Class<?>> buildins = new HashSet<Class<?>>();
 
+	public NodeRegistry() {
+		System.out.println("A");
+	}
+	
 	static {
 		buildins.add(String.class);
 		buildins.add(Boolean.class);
@@ -189,6 +193,12 @@ public final class NodeRegistry {
 		}
 		if (memb.getAnnotation(CanBeValue.class) != null) {
 			ts.canBeValue = true;
+		}
+		AlsoMappedTo annotation2 = memb.getAnnotation(AlsoMappedTo.class);
+		if (annotation2!=null){
+			for (Class<?>c:annotation2.value()){
+				register(c);
+			}
 		}
 		if (returnType instanceof ParameterizedType) {
 			ParameterizedType pt = (ParameterizedType) returnType;

@@ -6,6 +6,7 @@ import org.raml.dialects.core.annotations.BuiltinInstances;
 import org.raml.dialects.core.annotations.ClassTerm;
 import org.raml.dialects.core.annotations.DialectPropertyName;
 import org.raml.dialects.core.annotations.Hash;
+import org.raml.dialects.core.annotations.NeedsResolving;
 import org.raml.dialects.core.annotations.PropertyTerm;
 import org.raml.dialects.core.annotations.Reference;
 
@@ -18,6 +19,7 @@ public class NodeMapping {
 
 	@PropertyTerm("http://raml.org/vocabularies/meta#classTerm")
 	@Reference
+	@NeedsResolving
 	protected String classTerm;
 
 	@Hash("http://raml.org/vocabularies/meta#name")

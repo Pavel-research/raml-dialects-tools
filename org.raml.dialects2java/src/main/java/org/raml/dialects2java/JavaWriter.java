@@ -7,6 +7,8 @@ import java.util.LinkedHashSet;
 
 import javax.annotation.Generated;
 
+import org.raml.dialects.core.annotations.DomainRootElement;
+import org.raml.dialects.toplevel.model.Builtins;
 import org.raml.dialects.toplevel.model.Dialect;
 import org.raml.dialects.toplevel.model.NodeMapping;
 import org.raml.dialects.toplevel.model.PropertyMapping;
@@ -17,7 +19,6 @@ import com.sun.codemodel.JCodeModel;
 import com.sun.codemodel.JDefinedClass;
 import com.sun.codemodel.JExpr;
 import com.sun.codemodel.JExpression;
-import com.sun.codemodel.JInvocation;
 import com.sun.codemodel.JType;
 
 
@@ -68,6 +69,8 @@ public class JavaWriter {
 		build.getNodeMappings().values().forEach(v -> {
 				new SimpleBeanGenerator(this).define(v);
 		});
+		JDefinedClass jType = (JDefinedClass) defined.get(build.getRaml().getDocument().getEncodes());
+		jType.annotate(DomainRootElement.class).param("name", build.getDialect()).param("version", build.getVersion());
 		System.out.println(build);
 	}
 
@@ -97,7 +100,39 @@ public class JavaWriter {
 	}
 
 	public JType getType(ArrayList<NodeMapping> range, boolean b, boolean c, PropertyMapping p) {
-		return null;
+		if (range.size()==1){
+			NodeMapping nodeMapping = range.get(0);
+			if (nodeMapping==Builtins.BOOLEAN){
+				return this.mdl._ref(boolean.class);
+			}
+			if (nodeMapping==Builtins.STRING){
+				return this.mdl._ref(String.class);
+			}
+			if (nodeMapping==Builtins.INTEGER){
+				return this.mdl._ref(int.class);
+			}
+			if (nodeMapping==Builtins.FLOAT){
+				return this.mdl._ref(double.class);
+			}
+			if (nodeMapping==Builtins.NUMBER){
+				return this.mdl._ref(double.class);
+			}
+			if (nodeMapping instanceof Builtins){
+				return this.mdl._ref(String.class);
+			}
+			return getOrDefine(nodeMapping);
+			
+		}
+		return mdl._ref(Object.class);
+	}
+
+	JType getOrDefine(NodeMapping nodeMapping) {
+		if (defined.containsKey(nodeMapping)){
+			return defined.get(nodeMapping);
+		}
+		else{
+			return new SimpleBeanGenerator(this).define(nodeMapping);
+		}
 	}
 
 	public JExpression toArrayInit(ArrayList<NodeMapping> range, PropertyMapping p) {

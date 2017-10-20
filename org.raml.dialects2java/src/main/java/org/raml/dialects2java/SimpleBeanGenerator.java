@@ -2,12 +2,19 @@ package org.raml.dialects2java;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
+import java.util.LinkedHashSet;
 import java.util.Map;
 
+import org.raml.dialects.core.annotations.AlsoMappedTo;
+import org.raml.dialects.core.annotations.ClassTerm;
+import org.raml.dialects.core.annotations.Hash;
+import org.raml.dialects.core.annotations.PropertyTerm;
 import org.raml.dialects.toplevel.model.NodeMapping;
 import org.raml.dialects.toplevel.model.PropertyMapping;
 
 import com.sun.codemodel.ClassType;
+import com.sun.codemodel.JAnnotationArrayMember;
+import com.sun.codemodel.JArray;
 import com.sun.codemodel.JClass;
 import com.sun.codemodel.JDefinedClass;
 import com.sun.codemodel.JExpr;
@@ -33,6 +40,7 @@ public class SimpleBeanGenerator {
 		JDefinedClass defineClass = writer.defineClass(t, ClassType.CLASS);
 		writer.defined.put(t, defineClass);
 		t.getMappings().values().forEach(v -> generateProperty(defineClass, v));
+		defineClass.annotate(ClassTerm.class).param("value",t.getClassTerm());
 		return defineClass;
 	}
 
@@ -53,6 +61,7 @@ public class SimpleBeanGenerator {
 
 		if (p.isAllowMultiple()) {
 			initExpr = writer.toArrayInit(p.getRange(), p);
+			propType = ((JClass) writer.getModel()._ref(LinkedHashSet.class)).narrow(propType);
 		} else {
 			// Default dv = p.getRange().oneMeta(Default.class);
 			// if (dv != null) {
@@ -99,14 +108,23 @@ public class SimpleBeanGenerator {
 		JFieldVar field = null;
 		if (needField) {
 			field = defineClass.field(JMod.PROTECTED, propType, name);
-
+			field.annotate(PropertyTerm.class).param("value", p.getPropertyTerm());
+			if (rr.size()>1){
+				JAnnotationArrayMember paramArray = field.annotate(AlsoMappedTo.class).paramArray("value");
+				for (NodeMapping m:rr){
+					paramArray.param(JExpr.dotclass((JClass) writer.getOrDefine(m)));
+				}
+			}
+			if (p.getHash()!=null){
+				field.annotate(Hash.class).param("value", p.getHash());
+			}
 			if (initExpr != null) {
 				field.init(initExpr);
 			}
 		}
 		JMethod get = defineClass.method(JMod.PUBLIC, propType,
 				"get" + Character.toUpperCase(name.charAt(0)) + name.substring(1));
-
+		
 		JExpression ref = JExpr.ref(name);
 		if (ts != null && !ts.equals(propType)) {
 			ref = JExpr.cast(propType, ref);

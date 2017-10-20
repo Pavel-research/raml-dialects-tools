@@ -15,7 +15,7 @@ nodeMappings:
         propertyTerm: shacl.message
         range: string
       code:
-        propertyTerm: validation.jsCode
+        propertyTerm: shacl.jsCode
         range: string
       libraries:
         propertyTerm: shacl.jsLibrary
@@ -124,6 +124,9 @@ nodeMappings:
         propertyTerm: schema-org.name
         mandatory: true
         range: string
+      version:
+        propertyTerm: validation.version
+        range: string  
       description:
         propertyTerm: schema-org.description
         range: string
