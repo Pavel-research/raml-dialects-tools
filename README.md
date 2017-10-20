@@ -8,7 +8,7 @@ This project contains Java implementation of
   * RAML Vocabularies 
   * RAML Dialects
 
-Project goal is to provide  pure Java implementation for Dialects and Vocabularies specifications, as well as to provide facilities to parsing and serialization of user
+Project goal is to provide lightweight pure Java implementation for Dialects and Vocabularies specifications, as well as to provide facilities to parsing and serialization of user
 defined dialects.  
 
 ## Project modules
@@ -21,4 +21,8 @@ defined dialects.
 * `org.raml.dialects2javaMaven` contains a maven plugin which can be used to generate java beans for dialect
 
 
-*Java Version requirements:* `org.raml.dialects.core` is Java 1.6 to allow kernel to work on Android , other modules may require Java 1.8 to work properly.  
+*Java Version requirements:* `org.raml.dialects.core` is Java 1.6 to allow kernel to work on Android , other modules may require Java 1.8 to work properly.
+
+Examples: 
+ * [Using maven plugin](./examples/dialect2java)
+ * [Vocabularies] (./org.raml/vocabularies)  
