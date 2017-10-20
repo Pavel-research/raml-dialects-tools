@@ -161,7 +161,7 @@ public final class NodeModel {
 		}
 	}
 
-	private boolean isOk(JSONObject object, NodeModel m) {
+	static boolean isOk(JSONObject object, NodeModel m) {
 		boolean isOk = true;
 		for (PropertyModel model : m.dialectPropertyMappings.values()) {
 			if (model.required) {
@@ -176,5 +176,15 @@ public final class NodeModel {
 
 	public Class<?> getTargetClass() {
 		return targetClass;
+	}
+
+	public int fits(JSONObject v) {
+		int count=0;
+		for (String k:this.dialectPropertyMappings.keySet()){
+			if (v.has(k)){
+				count++;
+			}
+		}
+		return count;
 	}
 }

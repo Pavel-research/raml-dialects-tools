@@ -196,7 +196,7 @@ public final class NodeRegistry {
 		AlsoMappedTo annotation2 = memb.getAnnotation(AlsoMappedTo.class);
 		if (annotation2!=null){
 			for (Class<?>c:annotation2.value()){
-				register(c);
+				ts.alternatives.add(register(c));
 			}
 		}
 		if (returnType instanceof ParameterizedType) {

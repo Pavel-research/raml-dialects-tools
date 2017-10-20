@@ -12,6 +12,8 @@ import java.net.URL;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
 import org.raml.dialects.core.annotations.ClassTerm;
 import org.raml.dialects.core.annotations.DomainRootElement;
 
@@ -76,10 +78,13 @@ public class DialectRegistry {
 	public void registerParser(String header, String extension, IParser<?> parser, Class<?> target) {
 		map.put(new ParserKey(extension, header), new ParserRecord<Object>(parser, target));
 	}
+
 	DefaultParser defaultParser = new DefaultParser();
+
 	public Object parse(URI location) {
 		return parse(location, Object.class);
 	}
+
 	public Object parse(URL location) {
 		return parse(location, Object.class);
 	}
@@ -106,7 +111,7 @@ public class DialectRegistry {
 
 			String firstLine = getFirstLine(readStream);
 			ParserRecord<?> parserRecord = map.get(new ParserKey(extension, firstLine));
-			IDataAdapter adapter=null;
+			IDataAdapter adapter = null;
 			if (parserRecord == null) {
 				try {
 					adapter = (IDataAdapter) Class.forName("org.raml.dialects." + extension.toUpperCase())
@@ -117,23 +122,25 @@ public class DialectRegistry {
 				}
 			}
 			if (parserRecord == null) {
-				if (extension.equals("json")&&(clazz.getAnnotation(ClassTerm.class)!=null||readStream.trim().startsWith("["))){					
-					
+				if (extension.equals("json")
+						&& (clazz.getAnnotation(ClassTerm.class) != null || readStream.trim().startsWith("["))) {
+
 					return clazz.cast(defaultParser.parse(new StringReader(readStream), location, clazz));
 				}
 				throw new IllegalStateException("Does not know how to obtain parser for header:" + firstLine);
 			}
 			IParser<?> iParser = parserRecord.parser;
-			if (adapter!=null){
-				JSONOutput adaptToJson = adapter.adaptToJson(new StringReader(readStream), location, parserRecord.clazz);
-				if(iParser instanceof IJSONParser){
-					return (T)clazz.cast(((IJSONParser<?>)iParser).parse(adaptToJson, location, (Class) parserRecord.clazz));
-				}
-				else{
-					readStream=adaptToJson.toString();
+			if (adapter != null) {
+				JSONOutput adaptToJson = adapter.adaptToJson(new StringReader(readStream), location,
+						parserRecord.clazz);
+				if (iParser instanceof IJSONParser) {
+					return (T) clazz
+							.cast(((IJSONParser<?>) iParser).parse(adaptToJson, location, (Class) parserRecord.clazz));
+				} else {
+					readStream = adaptToJson.toString();
 				}
 			}
-			return (T)clazz.cast(iParser.parse(new StringReader(readStream), location, (Class) parserRecord.clazz));
+			return (T) clazz.cast(iParser.parse(new StringReader(readStream), location, (Class) parserRecord.clazz));
 		} catch (Exception e) {
 			throw new IllegalStateException(e);
 		}
@@ -158,7 +165,7 @@ public class DialectRegistry {
 					}
 				}
 				ClassTerm annotation2 = clazz.getAnnotation(ClassTerm.class);
-				if (annotation2!=null){
+				if (annotation2 != null) {
 					defaultParser.register(clazz);
 				}
 			}
@@ -198,5 +205,13 @@ public class DialectRegistry {
 
 	public static DialectRegistry getDefault() {
 		return registry;
+	}
+
+	public JSONArray toJSONLD(Object toSerialize,String iri) {
+		return DefaultParser.AMFJSONLD.writeJSONLD(toSerialize, iri);
+	}
+
+	public JSONObject toJSON(Object toSerialize) {
+		return DefaultParser.AMFJSONLD.writeJSON(toSerialize);
 	}
 }

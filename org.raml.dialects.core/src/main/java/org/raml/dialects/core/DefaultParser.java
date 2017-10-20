@@ -9,7 +9,7 @@ import org.json.JSONTokener;
 
 public class DefaultParser implements IParser<Object>,IJSONParser<Object>{
 
-	private static final AMFJSONLD AMFJSONLD = new AMFJSONLD();
+	static final AMFJSONLD AMFJSONLD = new AMFJSONLD();
 
 	@Override
 	public Class<Object> result() {

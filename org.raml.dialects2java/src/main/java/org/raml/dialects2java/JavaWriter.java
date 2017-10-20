@@ -109,13 +109,13 @@ public class JavaWriter {
 				return this.mdl._ref(String.class);
 			}
 			if (nodeMapping==Builtins.INTEGER){
-				return this.mdl._ref(int.class);
+				return this.mdl._ref(Integer.class);
 			}
 			if (nodeMapping==Builtins.FLOAT){
-				return this.mdl._ref(double.class);
+				return this.mdl._ref(Double.class);
 			}
 			if (nodeMapping==Builtins.NUMBER){
-				return this.mdl._ref(double.class);
+				return this.mdl._ref(Double.class);
 			}
 			if (nodeMapping instanceof Builtins){
 				return this.mdl._ref(String.class);

@@ -7,6 +7,7 @@ import java.util.Map;
 
 import org.raml.dialects.core.annotations.AlsoMappedTo;
 import org.raml.dialects.core.annotations.ClassTerm;
+import org.raml.dialects.core.annotations.DialectPropertyName;
 import org.raml.dialects.core.annotations.Hash;
 import org.raml.dialects.core.annotations.PropertyTerm;
 import org.raml.dialects.toplevel.model.NodeMapping;
@@ -117,6 +118,9 @@ public class SimpleBeanGenerator {
 			}
 			if (p.getHash()!=null){
 				field.annotate(Hash.class).param("value", p.getHash());
+			}
+			if (!field.name().equals(p.getName())){
+				field.annotate(DialectPropertyName.class).param("value", p.getName());
 			}
 			if (initExpr != null) {
 				field.init(initExpr);

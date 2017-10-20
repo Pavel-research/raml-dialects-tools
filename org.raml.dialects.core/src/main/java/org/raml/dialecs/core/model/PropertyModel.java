@@ -266,7 +266,7 @@ public class PropertyModel {
 					Object val = cm.get(key);
 					Object obj2json = obj2json(val, jsonSerializationContext);
 					map.put(key.toString(), obj2json);
-					removeHash(obj2json);
+					removeHash(obj2json, val);
 				}
 				target.put(this.dialectName, map);
 			}
@@ -280,14 +280,18 @@ public class PropertyModel {
 		}
 	}
 
-	private Object removeHash(Object obj2json) {
-		return ((JSONObject) obj2json).remove(registry.register(this.nodeType).getMappings().get(hash).dialectName);
+	private Object removeHash(Object obj2json, Object val) {
+		NodeModel register = registry.register(this.nodeType);
+		if (register == null) {
+			register = registry.register(val.getClass());
+		}
+		return ((JSONObject) obj2json).remove(register.getMappings().get(hash).dialectName);
 	}
 
 	private Object obj2json(Object val, JSONSerializationContext ct) {
-		if (this.resolve&&val instanceof String) {
-			String st=(String) val;
-			val=ct.resolve(st);
+		if (this.resolve && val instanceof String) {
+			String st = (String) val;
+			val = ct.resolve(st);
 		}
 		if (isBuiltin(val)) {
 			return val;
@@ -378,9 +382,27 @@ public class PropertyModel {
 		PropertyModel propertyModel = register.getMappings().get(hash);
 		propertyModel.setValue(parseJSONObject, key);
 	}
+	protected ArrayList<NodeModel> alternatives = new ArrayList<NodeModel>();
 
 	private Object parseJSONObject(Object v, JSONContext ct, int level) {
-		return registry.register(nodeType).readFromJSON((JSONObject) v, level + 1, ct);
+		JSONObject jso = (JSONObject) v;
+		if (!this.alternatives.isEmpty()) {
+			NodeModel alrernative = null;
+			for (NodeModel m : alternatives) {
+				if (NodeModel.isOk(jso, m)) {
+					if (alrernative==null){
+						alrernative = m;
+					}
+					else if (alrernative.fits(jso)<m.fits(jso)){
+						alrernative = m;
+					}
+				}
+			}
+			if (alrernative != null) {
+				return alrernative.readFromJSON(jso, level, ct);
+			}
+		}
+		return registry.register(nodeType).readFromJSON(jso, level + 1, ct);
 	}
 
 	public boolean isObject() {
