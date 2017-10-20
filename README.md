@@ -16,7 +16,7 @@ defined dialects.
 * `org.raml.dialects.core` contains a minimal kernel which supports parsing of RAML Dialects files in JSON/JSONLD formats to java beans as well as their serialization back to JSONLD or JSON
 * `org.raml.dialects.yaml` adds YAML as a storage format to the kernel
 * `org.raml.vocabularies` contains top level models for RAML vocabularies (see ./org.raml.vocabularies/README.MD)
-* `org.raml.dialects.toplevel` containt top level models for RAML Dialects
+* `org.raml.dialects.toplevel` contains top level models for RAML Dialects
 * `org.raml.dialect2java` contains a code which allows to generate java beans for a dialect
 * `org.raml.dialects2javaMaven` contains a maven plugin which can be used to generate java beans for dialect
 
@@ -33,7 +33,7 @@ Examples:
  
  ## Notes:
  
- * If you need to parse from yaml you should have `org.raml.dialects.yaml` on your class path
+ * If you need to parse from yaml you should have `org.raml.dialects.yaml` module on your class path
  * `org.raml.vocabularies` is not refactored to new core yet so vocabularies are limited to yaml format.
  
   
