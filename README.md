@@ -8,7 +8,7 @@ This project contains Java implementation of
   * RAML Vocabularies 
   * RAML Dialects
 
-Project goal is to provide lightweight pure Java implementation for Dialects and Vocabularies specifications, as well as to provide facilities to parsing and serialization of user
+Project goal is to provide lightweight pure Java implementation for Dialects and Vocabularies specifications, as well as to provide facilities for parsing and serialization of user
 defined dialects.  
 
 ## Project modules
