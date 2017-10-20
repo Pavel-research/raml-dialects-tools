@@ -25,4 +25,4 @@ defined dialects.
 
 Examples: 
  * [Using maven plugin](./examples/dialect2java)
- * [Vocabularies] (https://github.com/petrochenko-pavel-a/raml-dialects-tools/tree/master/org.raml.vocabularies)  
+ * [Vocabularies](https://github.com/petrochenko-pavel-a/raml-dialects-tools/tree/master/org.raml.vocabularies)  
