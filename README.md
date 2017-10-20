@@ -31,4 +31,9 @@ Examples:
 ## Usage:
  Good examples of using API may be found [here](./examples/dialect2java/src/test/java/org/aml/example/simple/dialects2java/BasicTest.java) 
  
+ ## Notes:
+ 
+ * If you need to parse from yaml you should have `org.raml.dialects.yaml` on your class path
+ * `org.raml.vocabularies` is not refactored to new core yet so vocabularies are limited to yaml format.
+ 
   
