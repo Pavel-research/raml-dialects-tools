@@ -152,5 +152,6 @@
 		<module>org.raml.dialects.yaml</module>
 		<module>org.raml.dialects.core</module>
 		<module>org.raml.dialects2java</module>
+		<module>org.raml.dialects2javaMaven</module>
 	</modules>
 </project>
